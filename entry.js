@@ -1,4 +1,4 @@
-require( './styles/impossiblefish.css' )
+require( './styles/impossiblefish.css' );
 
 import * as autosizeTank from './scripts/autosizeTank.js';
 import * as fillTank from './scripts/fillTank.js';
