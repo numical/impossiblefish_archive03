@@ -4,8 +4,9 @@
   "description": "Model development",
   "main": "index.js",
   "scripts": {
-    "webpack": "webpack --progress --colors",
-    "start": "webpack-dev-server --inline --progress --colors --content-base public"
+    "webpack": "webpack --devtool eval --progress --colors",
+    "debug": "webpack-dev-server --devtool eval --inline --progress --colors --content-base public",
+    "deploy": "NODE_ENV=production webpack -p"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,8 @@
     "file-loader": "^0.8.5",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.9"
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
     "react": "^0.14.3"
