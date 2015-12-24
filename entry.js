@@ -10,9 +10,9 @@ window.onload = function(){
   return ( container || document ).querySelector( selector );
  }
 
- let canvas = $('canvas'); 
+ let canvas = $('canvas'), 
+     water = $('#water'); 
  autosizeTank.init( canvas );
- fillTank.init( canvas );
  menu.init( canvas );
 };
 
