@@ -1,18 +1,25 @@
 require( './styles/impossiblefish.css' );
 
 import * as autosizeTank from './scripts/autosizeTank.js';
-import * as fillTank from './scripts/fillTank.js';
 import * as menu from './scripts/menu.js'
 
-window.onload = function(){
- 
- function $( selector, container ) {
-  return ( container || document ).querySelector( selector );
- }
+let behaviours = [ autosizeTank, menu ];
 
- let canvas = $('canvas'), 
-     water = $('#water'); 
- autosizeTank.init( canvas );
- menu.init( canvas );
+window.onload = function(){
+ let canvas = $('canvas');
+ behaviours.forEach( behaviour => {
+  if ( behaviour.init ) {
+   let resizeFn = behaviour.init( canvas );
+   if ( resizeFn ) {
+    window.addEventListener( 'resize', resizeFn, false );
+    window.addEventListener('orientationchange', resizeFn, false );
+   }
+  }    
+ } );
 };
+
+function $( selector, container ) {
+ return ( container || document ).querySelector( selector );
+}
+
 
