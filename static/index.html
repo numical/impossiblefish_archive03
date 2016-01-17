@@ -1,17 +1,30 @@
 <html>
- <head>
-  <title>Impossible Fish</title>
- </head>
- <body>
-  <header>impossible fish</header>
-  <div id="fishtank">
-   <canvas height=0 width=0>
-    Sorry, your browser does not support fish tanks!
-   </canvas>
-   <div id='water'></div>
-  </div>
-  <footer>(c)numical.com 2016</footer>
-  <script src="bundle.js"></script>
-  <noscript>Sorry, your browser does not support fish tanks!</noscript>
- </body> 
+   <head>
+      <title>Impossible Fish</title>
+   </head>
+   <body>
+     <header>impossible fish</header>
+     <div id="fishtank">
+       <label for="openmenu">
+         <canvas height=0 width=0>
+           Sorry, your browser does not support fish tanks!
+         </canvas>
+       </label>
+       <input type="radio" id="openmenu" name="menucontrol"/>
+       <div id="menu">
+        <label for="closemenu">
+          <ul>
+            <li>Add Fish</li>
+            <li>Stop Bubbles</li>
+            <li>Connect Tank</li>
+          </ul>
+        </label>
+        <input type="radio" id="closemenu" name="menucontrol"/>
+      </div> 
+      <div id='water'></div>  
+     </div>
+     <footer>(c)numical.com 2016</footer>
+     <script src="bundle.js"></script>
+     <noscript>Sorry, your browser does not support fish tanks!</noscript>
+   </body> 
 </html>

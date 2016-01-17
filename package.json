@@ -4,8 +4,8 @@
   "description": "Model development",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --devtool eval --progress --colors",
-    "debug": "webpack-dev-server --devtool eval --inline --progress --colors --content-base public",
+    "build": "webpack --devtool source-map --progress --colors",
+    "debug": "webpack-dev-server --devtool source-map --inline --progress --colors --content-base public",
     "deploy": "NODE_ENV=production webpack -p"
   },
   "repository": {

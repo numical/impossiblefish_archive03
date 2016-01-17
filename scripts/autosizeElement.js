@@ -1,15 +1,15 @@
-export function init( element ){
+export function init( element, sizeTo ){
  
  let borders = introspectBorders( element );             
  resize();
  
  function resize(){
-  if ( element.width >= element.parentNode.clientWidth ) {
+  if ( element.width >= sizeTo.clientWidth ) {
    element.width = 0;
    element.height = 0;
   }
-  element.width=element.parentNode.clientWidth - borders.horizontal * 2;
-  element.height=element.parentNode.clientHeight - borders.vertical;
+  element.width=sizeTo.clientWidth - borders.horizontal * 2;
+  element.height=sizeTo.clientHeight - borders.vertical;
   // console.log( element.width + ", " + element.height );
  }
 
