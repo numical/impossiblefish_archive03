@@ -33,11 +33,11 @@ footer {
   position: relative;
 }
 
-#fishtank input {
+#fishtank input[type=checkbox] {
   display: none;
 }
 
-#fishtank input:checked + #menu {
+#fishtank input[type=checkbox]:checked ~ #menu {
   display: block;
 }
 
@@ -53,7 +53,8 @@ canvas {
   bottom: 3;
   border-radius: 50px;
   border-color: black;
-  z-index: 1;
+  z-index: 2;
+  opacity: 0.5;
 }
 
 #menu {
@@ -61,13 +62,13 @@ canvas {
   position: absolute;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: 1;
   border-color: rgb(249,205,27);
   text-align: center;
   font-family: "Indie Flower", cursive;
   font-size: 2em;
   animation-name: fadeInMenu, alternatingMenu;
-  animation-duration: 0.5s, 3s;
+  animation-duration: 1s, 3s;
   animation-direction: alternate;
   animation-iteration-count: 1, infinite;
   animation-timing-function: linear;
@@ -78,7 +79,7 @@ canvas {
       opacity: 0;      
   }
   to {
-      opacity: 0.6;
+      opacity: 1.0;
   }
 }
 
