@@ -8,10 +8,18 @@ module.exports = {
  },
  module: {
   loaders: [
-   { test: /\.html$/, loader: 'file-loader' },
-   { test: /\.css$/, loader: 'style-loader!css-loader' },
-   { test: /\.(png|woff2)$/, loader: 'url-loader?limit=20000' },
-   { test: /\.js$/, loader: 'babel-loader?presets[]=es2015', exclude: /node_modules/ }
+   { test: /\.html$/,
+     loader: 'file-loader' },
+   { test: /\.css$/, 
+     loader: 'style-loader!css-loader' },
+   { test: /\.(png|woff2)$/, 
+     loader: 'url-loader?limit=20000' },
+   { test: /\.js$/, 
+     loader: 'babel-loader',
+     query: {
+       presets: [ 'es2015', 'react' ]
+     }, 
+     exclude: /node_modules/ }
    ]
  },
  plugins: [  

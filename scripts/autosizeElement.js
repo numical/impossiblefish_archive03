@@ -1,6 +1,8 @@
-export function init( element, sizeTo ){
+export function init( gui ){
  
- let borders = introspectBorders( element );             
+ const element = gui.canvas,
+       sizeTo = gui.fishtank,
+       borders = introspectBorders( element );             
  resize();
  
  function resize(){

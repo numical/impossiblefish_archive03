@@ -1,15 +1,20 @@
 require( './styles/impossiblefish.css' );
 
 import * as autosizeTank from './scripts/autosizeElement.js';
+import * as reactMenu from './scripts/reactMenu.js';
 
-let behaviours = [ autosizeTank ];         
+const behaviours = [ autosizeTank, reactMenu ];         
 
 window.onload = function(){
- let canvas = $('canvas'),
-     fishtank = $('#fishtank');
+ const gui = { 
+   canvas: $('canvas'),
+   fishtank: $('#fishtank'),
+   menu: $('#menu'),
+   openmenu: $('#openmenu')
+ };
  behaviours.forEach( behaviour => {
   if ( behaviour.init ) {
-   let resizeFn = behaviour.init( canvas, fishtank );
+   let resizeFn = behaviour.init( gui );
    if ( resizeFn ) {
     window.addEventListener( 'resize', resizeFn, false );
     window.addEventListener('orientationchange', resizeFn, false );
