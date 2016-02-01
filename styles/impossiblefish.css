@@ -29,7 +29,7 @@ footer {
 }
 
 #fishtank {
-  flex: 1 1 auto;
+  flex: 2 1 auto;
   position: relative;
 }
 
@@ -119,6 +119,22 @@ canvas {
     top: 3; 
     border-radius: 50px;
   }
+}
+
+#console {
+  display: none;
+  flex: 1 1 0;    
+  position: relative;
+  margin: 10px;
+  overflow: auto;
+  background-color: black;
+  font-family: monospace;
+  color: white;
+}
+
+[contenteditable="true"]:active, [contenteditable="true"]:focus {
+  border:none;
+  outline:none;
 }
 
 @font-face {
