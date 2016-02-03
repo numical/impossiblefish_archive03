@@ -1,4 +1,4 @@
-html, body { 
+html, body, #react-container,  #react-content { 
   height: 100%;
   min-height: 100%;
   width: 100%;
@@ -6,7 +6,7 @@ html, body {
   padding: 0;
 }
 
-body {
+#react-content {
   background-color: rbg(241,241,241);
   display: flex;
   flex-flow: column nowrap;
@@ -43,18 +43,28 @@ footer {
 
 canvas, #water {
   position: absolute;
-  left: 3; right: 3; 
+  left: 3;
+  right: 3; 
+  top: 3;
+  bottom: 3;
   border-style: solid;
   border-width: 3px; /* must be in px for javascript in entry.js */
 }
 
 canvas {
-  top: 3;
-  bottom: 3;
   border-radius: 50px;
   border-color: black;
   z-index: 2;
   opacity: 0.5;
+}
+
+#water {
+  animation-duration: 2s;
+  animation-name: fillTank;
+  animation-fill-mode: forwards;
+  border-style: none;
+  background-color: lightblue;
+  z-index: 0;
 }
 
 #menu {
@@ -94,17 +104,6 @@ canvas {
 
 #menu ul {
   list-style: none;
-}
-
-#water {
-  animation-duration: 2s;
-  animation-name: fillTank;
-  animation-fill-mode: forwards;
-  bottom: 0;
-  top: 3;
-  border-color: lightblue;
-  background-color: lightblue;
-  z-index: 0;
 }
 
 @keyframes fillTank {
