@@ -1,7 +1,7 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
- entry: './app.js',
+ entry: './js/app.js',
  output: {
   path: process.env.NODE_ENV === 'production' ? './dist' : './build',
   filename: 'impossiblefish.js'
@@ -24,7 +24,7 @@ module.exports = {
  },
  plugins: [  
   new CopyWebpackPlugin([
-   { from: './index.html' }
+   { from: './static/index.html' }
   ])
  ]
 }

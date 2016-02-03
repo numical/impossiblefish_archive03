@@ -1,5 +1,5 @@
 // static non-javascript assets for webpack
-require( './impossiblefish.css' );
+require( '../static/impossiblefish.css' );
 
 // static javascript assets using es6 modules (transpiled by babel for webpack) 
 import React from 'react'
