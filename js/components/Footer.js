@@ -2,6 +2,6 @@ import React from 'react'
 
 export default React.createClass({
   render(){ return (
-    <footer>(c)numical.com 2016</footer>
+    <footer>Copyright &copy; 2016, Incremental Ltd, All rights reserved</footer>
   ) }
 })
