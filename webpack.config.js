@@ -1,10 +1,10 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
- entry: './entry.js',
+ entry: './app.js',
  output: {
   path: process.env.NODE_ENV === 'production' ? './dist' : './build',
-  filename: 'bundle.js'
+  filename: 'impossiblefish.js'
  },
  module: {
   loaders: [
@@ -24,7 +24,7 @@ module.exports = {
  },
  plugins: [  
   new CopyWebpackPlugin([
-   { from: './static' }
+   { from: './index.html' }
   ])
  ]
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Menu from './Menu.js';
 import { getCSSBoxInfo } from '../util/DOMUtil.js';
 
 const Fishtank = React.createClass({
@@ -26,6 +27,10 @@ const Fishtank = React.createClass({
     }
   },
 
+  handleClick(){
+    this.refs.menu.getDOMNode().style.display = 'block';
+  },
+
   componentDidMount(){
     this.autosizeCanvas();
     window.addEventListener('resize', this.autosizeCanvas);
@@ -39,13 +44,10 @@ const Fishtank = React.createClass({
   
   render(){ return (
       <div id='fishtank' ref='fishtank'>
-        <label htmlFor='openmenu'>
-          <canvas ref='canvas' height={this.state.height} width={this.state.width}>
-            Sorry, your browser does not support fish tanks!
-          </canvas>
-        </label>
-        <input type='checkbox' id='openmenu'/>
-        <div id='menu'/>
+        <canvas ref='canvas' height={this.state.height} width={this.state.width} onClick={this.handleClick}>
+          Sorry, your browser does not support fish tanks!
+        </canvas>
+        <Menu ref='menu'/>         
         <div id='water'/>
       </div>
    )} 
