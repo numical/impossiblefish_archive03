@@ -1,17 +1,15 @@
-import React from 'react';
+import { connect } from 'react-redux';
+import View from './ConsoleView.js'
 
-const Console = React.createClass({
+const mapStateToProps = ( state ) => {
+  return state.console
+}
 
-  getInitialState(){
-    return {
-      history: {},
-      current: "***Fishtank Console***"
-    }
-  },
-  
-  render(){ return (
-    <div id='console' contentEditable={true}>{this.state.current}</div>
-  )}
-})
+const mapDispatchToProps = ( dispatch ) => {
+  return {}
+}
 
-export default Console;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(View)

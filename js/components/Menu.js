@@ -1,15 +1,32 @@
-import React from 'react'
+import { connect } from 'react-redux'
+import { toggleConsole } from '../actions/actions.js'
+import View from './MenuView.js'
 
-export default React.createClass({
-  render(){ return (
-      <div id='menu'>
-        <ul>
-          <li>Add Fish</li>
-          <li>Connect</li>
-          <li>Show Console</li>
-        </ul>
-      </div>
-    );
+
+const mapStateToProps = ( state ) => {
+  
+  const items = [];
+
+  // toggle console visibility
+  items.push( {
+    display: state.console.visible? "Hide Console" : "Show Console",
+    action: toggleConsole()
+  });
+
+  return {
+    visible: state.menu.visible,
+    items: items
   }
-})
+}
+
+const mapDispatchToProps = ( dispatch ) => {
+  return {
+    fireAction: (action) => dispatch( action )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(View)
 
