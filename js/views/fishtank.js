@@ -4,46 +4,61 @@ import { getCSSBoxInfo } from '../util/DOMUtil.js';
 
 const FishtankView = React.createClass({
 
-  getInitialState(){
-    return {
-      height: 0,
-      width: 0
+  calculateHeight() {
+    if ( this.refs.fishtank ){
+      return this.refs.fishtank.clientHeight - this.state.box.vertical 
+    } else {
+      return 0
+    }
+  },
+      
+  calculateWidth() {
+    if ( this.refs.fishtank ) {
+      return this.refs.fishtank.clientWidth - this.state.box.horizontal
+    } else {
+      return 0
     }
   },
 
-  autosizeCanvas(){
-    if ( this.refs.fishtank ) {
-      if ( this.state.width >= this.refs.fishtank.clientWidth ) {
-        this.setState({ height: 0, width: 0 });
-      }
-      const box = this.state.box ? this.state.box : getCSSBoxInfo( this.refs.canvas ),
-            height = this.refs.fishtank.clientHeight - box.vertical, 
-            width = this.refs.fishtank.clientWidth - box.horizontal;
-      this.setState( { height: height, width: width, box: box } );
+  rerender() {
+    if ( this.refs.canvas.width >= this.refs.fishtank.clientWidth ) {
+     this.setState( this.state );
     }
+    this.setState( this.state )
   },
 
   componentDidMount(){
-    this.autosizeCanvas();
-    window.addEventListener('resize', this.autosizeCanvas);
-    window.addEventListener('orientationchange', this.autosizeCanvas);
+    const box = getCSSBoxInfo( this.refs.canvas )
+    this.setState( { box: box } )
+    window.addEventListener('resize', this.rerender);
+    window.addEventListener('orientationchange', this.rerender);
   }, 
 
   componentWillUnmount(){
-    window.removeEventListener('resize', this.autosizeCanvas);
-    window.removeEventListener('orientationchange', this.autosizeCanvas);
+    window.removeEventListener('resize', this.rerender);
+    window.removeEventListener('orientationchange', this.rerender);
   },
 
   render(){
-    return (
-      <div id='fishtank' ref='fishtank'>
-        <canvas ref='canvas' height={this.state.height} width={this.state.width} onClick={this.props.click}>
-          Sorry, your browser does not support fish tanks!
-        </canvas>
-        <Menu ref='menu'/>         
-        <div id='water'/>
-      </div>
-    )
+
+    if (this.props.inStartupAnimation) {
+      return (
+        <div id='fishtank' ref='fishtank'>
+          <canvas ref='canvas' height={this.calculateHeight()} width={this.calculateWidth()} onClick={this.props.click}>
+            Sorry, your browser does not support fish tanks!
+          </canvas>
+          <Menu ref='menu'/>         
+          <div id='water'/>
+        </div> ) 
+    } else {
+   return (
+        <div id='fishtank' ref='fishtank'>
+          <canvas ref='canvas' height={this.calculateHeight()} width={this.calculateWidth()} onClick={this.props.click}>
+            Sorry, your browser does not support fish tanks!
+          </canvas>
+          <Menu ref='menu'/>         
+        </div> )    
+    }
   }
 })
 

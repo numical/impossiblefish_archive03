@@ -7,8 +7,8 @@ import Footer from './footer.js'
 export default () => (
   <div id='react-content'>
     <Header />
-    <Fishtank />
     <Console />
+    <Fishtank />
     <Footer />
   </div>
 )

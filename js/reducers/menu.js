@@ -2,7 +2,7 @@ import { TOGGLE_MENU } from '../actions/actions.js'
 
 
 const initialState = {
-  visible: true
+  visible: false
 }
 
 export default ( state=initialState, action ) => {

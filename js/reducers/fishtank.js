@@ -1,16 +1,15 @@
-import { TOGGLE_CONSOLE } from '../actions/actions.js'
-
+const STARTUP_ANIMATION_DURATION = 2000
 
 const initialState = {
+  inStartupAnimation: true,
+  startUpTime: Date.now()
 }
 
-
 export default ( state=initialState, action ) => {
-  
-  switch( action.type ) {
-    case TOGGLE_CONSOLE:
-      return Object.assign({},state )
-    default:
-      return state;
+
+  if ( state.inStartupAnimation && Date.now() - state.startUpTime > STARTUP_ANIMATION_DURATION ) {
+    return Object.assign({},state,{inStartupAnimation: false})
+  } else {
+    return state;
   }
 }
