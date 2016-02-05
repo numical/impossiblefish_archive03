@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
-import View from './ConsoleView.js'
+import { TOGGLE_MENU, toggleMenu } from '../actions/actions.js'
+import View from '../views/fishtank.js'
 
 const mapStateToProps = ( state ) => {
-  return state.console
+  return state.fishtank
 }
 
 const mapDispatchToProps = ( dispatch ) => {
-  return {}
+  return {
+    clicked: () => dispatch( toggleMenu() )
+ }
 }
 
 export default connect(

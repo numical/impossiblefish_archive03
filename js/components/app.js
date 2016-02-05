@@ -1,9 +1,8 @@
 import React from 'react'
-import Fishtank from './Fishtank.js'
-import Console from './Console.js'
-import Header from './Header.js'
-import Footer from './Footer.js'
-
+import Fishtank from './fishtank.js'
+import Console from './console.js'
+import Header from './header.js'
+import Footer from './footer.js'
 
 export default () => (
   <div id='react-content'>

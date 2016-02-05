@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { toggleConsole } from '../actions/actions.js'
-import View from './MenuView.js'
+import View from '../views/menu.js'
 
 
 const mapStateToProps = ( state ) => {

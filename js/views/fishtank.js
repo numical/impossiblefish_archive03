@@ -1,8 +1,8 @@
 import React from 'react';
-import Menu from './Menu.js';
+import Menu from '../components/menu.js'
 import { getCSSBoxInfo } from '../util/DOMUtil.js';
 
-const Fishtank = React.createClass({
+const FishtankView = React.createClass({
 
   getInitialState(){
     return {
@@ -27,10 +27,6 @@ const Fishtank = React.createClass({
     }
   },
 
-  handleClick(){
-    this.refs.menu.getDOMNode().style.display = 'block';
-  },
-
   componentDidMount(){
     this.autosizeCanvas();
     window.addEventListener('resize', this.autosizeCanvas);
@@ -41,16 +37,18 @@ const Fishtank = React.createClass({
     window.removeEventListener('resize', this.autosizeCanvas);
     window.removeEventListener('orientationchange', this.autosizeCanvas);
   },
-  
-  render(){ return (
+ 
+  render(){
+    return (
       <div id='fishtank' ref='fishtank'>
-        <canvas ref='canvas' height={this.state.height} width={this.state.width} onClick={this.handleClick}>
+        <canvas ref='canvas' height={this.state.height} width={this.state.width} onClick={this.props.click}>
           Sorry, your browser does not support fish tanks!
         </canvas>
         <Menu ref='menu'/>         
         <div id='water'/>
       </div>
-   )} 
+    )
+  }
 })
 
-export default Fishtank;
+export default FishtankView
