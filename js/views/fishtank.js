@@ -13,16 +13,12 @@ const FishtankView = React.createClass({
 
   autosizeCanvas(){
     if ( this.refs.fishtank ) {
-
       if ( this.state.width >= this.refs.fishtank.clientWidth ) {
         this.setState({ height: 0, width: 0 });
       }
-
-      let box = this.state.box ?
-                this.state.box :
-                getCSSBoxInfo( this.refs.canvas ),
-          height = this.refs.fishtank.clientHeight - box.vertical, 
-          width = this.refs.fishtank.clientWidth - box.horizontal;
+      const box = this.state.box ? this.state.box : getCSSBoxInfo( this.refs.canvas ),
+            height = this.refs.fishtank.clientHeight - box.vertical, 
+            width = this.refs.fishtank.clientWidth - box.horizontal;
       this.setState( { height: height, width: width, box: box } );
     }
   },
@@ -37,7 +33,7 @@ const FishtankView = React.createClass({
     window.removeEventListener('resize', this.autosizeCanvas);
     window.removeEventListener('orientationchange', this.autosizeCanvas);
   },
- 
+
   render(){
     return (
       <div id='fishtank' ref='fishtank'>
