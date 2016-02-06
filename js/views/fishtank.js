@@ -2,7 +2,13 @@ import React from 'react';
 import Menu from '../components/menu.js'
 import { getCSSBoxInfo } from '../util/DOMUtil.js';
 
+const FILL_ANIMATION_DURATION = 2000
+
 const FishtankView = React.createClass({
+
+  getInitialState() {
+    return { showWater: true }
+  },
 
   calculateHeight() {
     if ( this.refs.fishtank ){
@@ -30,8 +36,9 @@ const FishtankView = React.createClass({
   componentDidMount(){
     const box = getCSSBoxInfo( this.refs.canvas )
     this.setState( { box: box } )
-    window.addEventListener('resize', this.rerender);
-    window.addEventListener('orientationchange', this.rerender);
+    window.addEventListener('resize', this.rerender)
+    window.addEventListener('orientationchange', this.rerender)
+    window.setTimeout( () => this.setState( { showWater:false } ), FILL_ANIMATION_DURATION )
   }, 
 
   componentWillUnmount(){
@@ -40,25 +47,14 @@ const FishtankView = React.createClass({
   },
 
   render(){
-
-    if (this.props.inStartupAnimation) {
-      return (
-        <div id='fishtank' ref='fishtank'>
-          <canvas ref='canvas' height={this.calculateHeight()} width={this.calculateWidth()} onClick={this.props.click}>
-            Sorry, your browser does not support fish tanks!
-          </canvas>
-          <Menu ref='menu'/>         
-          <div id='water'/>
-        </div> ) 
-    } else {
-   return (
-        <div id='fishtank' ref='fishtank'>
-          <canvas ref='canvas' height={this.calculateHeight()} width={this.calculateWidth()} onClick={this.props.click}>
-            Sorry, your browser does not support fish tanks!
-          </canvas>
-          <Menu ref='menu'/>         
-        </div> )    
-    }
+    return (
+      <div id='fishtank' ref='fishtank'>
+        <canvas ref='canvas' height={this.calculateHeight()} width={this.calculateWidth()} onClick={this.props.click}>
+          Sorry, your browser does not support fish tanks!
+        </canvas>
+        <Menu ref='menu'/>         
+        {this.state.showWater ? <div id='water'/> : null}
+      </div> ) 
   }
 })
 

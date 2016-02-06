@@ -3,9 +3,9 @@ import { toggleMenu } from '../actions/actions.js'
 import View from '../views/fishtank.js'
 
 const mapStateToProps = ( state ) => {
+  // we do not actually use this property but force  a re-render when console property changes
   return { 
     consoleVisible: state.console.visible,
-    inStartupAnimation: state.fishtank.inStartupAnimation                                       
   }
 }
 

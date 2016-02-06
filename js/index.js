@@ -8,10 +8,9 @@ import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import menu from './reducers/menu.js'
 import console from './reducers/console.js'
-import fishtank from './reducers/fishtank.js'
 import App from './components/app.js'
 
-const rootReducer = combineReducers({ menu, console, fishtank }),
+const rootReducer = combineReducers({ menu, console }),
       store = createStore( rootReducer ),
       root = (
          <Provider store={store}>
