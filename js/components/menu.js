@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { toggleConsole } from '../actions/actions.js'
+import { toggleConsole, toggleMenu } from '../actions/actions.js'
 import View from '../views/menu.js'
 
 
@@ -21,7 +21,10 @@ const mapStateToProps = ( state ) => {
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
-    fireAction: (action) => dispatch( action )
+    fireAction: (action) => {
+      dispatch( action )
+      dispatch( toggleMenu() )
+    }
   }
 }
 
