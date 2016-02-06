@@ -1,4 +1,7 @@
-import React from 'react';
+import React from 'react'
+import { findDOMNode } from 'react-dom'
+
+const CURSOR = ':'
 
 const ConsoleView = React.createClass({
 
@@ -7,7 +10,8 @@ const ConsoleView = React.createClass({
       <div id='console' 
            contentEditable={true}
            style={this.getStyle()}>
-        {this.props.current}
+        {this.props.history.map( line => <div contentEditable={false}>{line}</div> )}
+        <div ref='focus'>{CURSOR}</div>
       </div>
     )
   },
@@ -16,6 +20,10 @@ const ConsoleView = React.createClass({
     return {
       display: this.props.visible ? 'block' : 'none'
     }
+  },
+
+  componentDidMount(){
+    findDOMNode(this.refs.focus).focus()
   }
 })
 
