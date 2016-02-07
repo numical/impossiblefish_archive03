@@ -2,7 +2,7 @@ import { TOGGLE_CONSOLE } from '../actions/actions.js'
 
 
 const initialState = {
-  visible: false, 
+  visible: false,
   history: ["***Fishtank Console***","type 'help' for available commands"]
 }
 

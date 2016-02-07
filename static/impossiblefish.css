@@ -31,6 +31,7 @@ footer {
 #fishtank {
   flex: 2 1 auto;
   position: relative;
+  background-color: yellow;
 }
 
 canvas, #water {
@@ -143,7 +144,7 @@ canvas {
 }
 
 #console {
-  flex: 1 1 auto; 
+  flex: 1 1 5em;  
   position: relative;
   margin: 10px;
   overflow: auto;
