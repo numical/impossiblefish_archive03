@@ -19,19 +19,16 @@ header, footer {
 }
  
 header { 
-  order: 1;
   color: rgb(249,205,27);
   font-size: 3em;
   font-family: "Indie Flower", cursive;
 }
 
 footer {
-  order: 4;
   font-size: 0.8em;
 }
 
 #fishtank {
-  order: 3;
   flex: 2 1 auto;
   position: relative;
 }
@@ -146,8 +143,7 @@ canvas {
 }
 
 #console {
-  order: 2;
-  flex: 1 1 0;    
+  flex: 1 1 auto; 
   position: relative;
   margin: 10px;
   overflow: auto;
