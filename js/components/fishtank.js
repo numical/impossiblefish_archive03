@@ -5,7 +5,7 @@ import View from '../views/fishtank.js'
 const mapStateToProps = ( state ) => {
   // we do not actually use this property but force  a re-render when console property changes
   return { 
-    consoleVisible: state.console.visible,
+    showConsole: state.console.visible,
   }
 }
 

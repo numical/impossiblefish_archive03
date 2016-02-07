@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import menu from './reducers/menu.js'
 import console from './reducers/console.js'
-import App from './components/app.js'
+import App from './views/app.js'
 
 const rootReducer = combineReducers({ menu, console }),
       store = createStore( rootReducer ),
