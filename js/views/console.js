@@ -8,18 +8,22 @@ const ConsoleView = React.createClass({
   render(){
     // if ( !this.props.visible ) return null
     return (
-      <div id='console' ref='console' contentEditable={true} style={this.getStyle()}>
+      <div id='console' contentEditable={true} style={this.getStyle()}>
         {this.props.history.map( line => <div contentEditable={false}>{line}</div> )}
-        <div ref='focus'>{CURSOR}</div>
+        <div ref='input'>{CURSOR}</div>
       </div>
     )
   },
 
-  componentDidMount(){
+  setFocusOnInput(){
     if ( this.props.visible ) {
-      findDOMNode(this.refs.console).focus()
+      findDOMNode(this.refs.input).focus()
     }
   },
+
+  componentDidMount(){ this.setFocusOnInput() },
+
+  componentDidUpdate(){ this.setFocusOnInput() },
 
   getStyle(){
     return {

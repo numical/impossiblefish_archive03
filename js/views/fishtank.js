@@ -38,9 +38,7 @@ const FishtankView = React.createClass({
     this.setState( { box: box } )
     window.addEventListener('resize', this.rerender)
     window.addEventListener('orientationchange', this.rerender)
-    if ( this.state.showWater ) {
-      window.setTimeout( () => this.setState( { showWater:false } ), FILL_ANIMATION_DURATION )
-    }
+    window.setTimeout( () => this.setState( { showWater:false } ), FILL_ANIMATION_DURATION )
   }, 
 
   componentWillUnmount(){

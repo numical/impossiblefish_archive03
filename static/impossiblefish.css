@@ -31,7 +31,6 @@ footer {
 #fishtank {
   flex: 2 1 auto;
   position: relative;
-  background-color: yellow;
 }
 
 canvas, #water {
@@ -50,12 +49,11 @@ canvas {
   z-index: 1;
   opacity: 0.5;
   animation-duration: 2s;
-  animation-name: test;    
+  animation-name: turnBlueAfterWaterFillsUp;
   animation-fill-mode: forwards;
- }
+}
 
-
-@keyframes test {
+@keyframes turnBlueAfterWaterFillsUp {
   0% {
     background-color: white;
   }
@@ -75,7 +73,6 @@ canvas {
   background-color: lightblue;
   z-index: 0;
 }
-
 
 @keyframes fillTank {
   0% {
@@ -144,7 +141,7 @@ canvas {
 }
 
 #console {
-  flex: 1 1 5em;  
+  flex: 0 0 10em;  
   position: relative;
   margin: 10px;
   overflow: auto;
