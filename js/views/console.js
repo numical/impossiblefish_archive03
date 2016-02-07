@@ -9,7 +9,9 @@ const ConsoleView = React.createClass({
     // if ( !this.props.visible ) return null
     return (
       <div id='console' contentEditable={true} style={this.getStyle()}>
-        {this.props.history.map( line => <div contentEditable={false}>{line}</div> )}
+        <div contentEditable={false}>
+          {this.props.history.map( line => <div>{line}</div> )}
+        </div>
         <div ref='input'>{CURSOR}</div>
       </div>
     )
@@ -17,7 +19,13 @@ const ConsoleView = React.createClass({
 
   setFocusOnInput(){
     if ( this.props.visible ) {
-      findDOMNode(this.refs.input).focus()
+      const n = findDOMNode(this.refs.input),
+            s = window.getSelection(),
+            r = document.createRange()
+      r.setStart(n, 1)
+      r.setEnd(n, 1)
+      s.removeAllRanges()
+      s.addRange(r)
     }
   },
 
