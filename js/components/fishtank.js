@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { toggleMenu } from '../actions/actions.js'
+import { toggleMenu } from '../constants/actions.js'
 import View from '../views/fishtank.js'
 
 const mapStateToProps = ( state ) => {

@@ -5,7 +5,7 @@ const MenuView = React.createClass({
       <div id='menu' style={this.getStyle()}>
         <ul>
           { this.props.items.map( (item) => {
-             return <li onClick={() => this.props.fireAction(item.action)}>{item.display}</li> 
+             return <li key={item.display} onClick={() => this.props.fireAction(item.action)}>{item.display}</li> 
             } )
           } 
         </ul>

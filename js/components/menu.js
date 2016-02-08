@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { toggleConsole, toggleMenu } from '../actions/actions.js'
+import { toggleConsole, toggleMenu } from '../constants/actions.js'
 import View from '../views/menu.js'
 
 
