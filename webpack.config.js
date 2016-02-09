@@ -1,6 +1,6 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin'),
-    webpack = require('webpack')
-
+    autoprefixer = require('autoprefixer')
+    
 module.exports = {
  
  entry: './js/index.js',
@@ -16,7 +16,7 @@ module.exports = {
      loader: 'file-loader'
    },
    { test: /\.css$/, 
-     loader: 'style-loader!css-loader'
+     loader: 'style-loader!css-loader!postcss-loader'
    },
    { test: /\.(png|woff2)$/, 
      loader: 'url-loader?limit=20000'
@@ -30,6 +30,8 @@ module.exports = {
    }
   ]
  },
+
+ postcss: [autoprefixer({browsers: ['last 2 versions']} )],
  
  plugins: [  
   new CopyWebpackPlugin([
