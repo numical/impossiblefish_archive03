@@ -1,5 +1,4 @@
-import { TOGGLE_MENU } from '../actions/actions.js'
-
+import { TOGGLE_MENU } from '../constants/actions.js'
 
 const initialState = {
   visible: false

@@ -1,4 +1,4 @@
-import { TOGGLE_CONSOLE, DISPLAY_TO_CONSOLE } from '../actions/actions.js'
+import { TOGGLE_CONSOLE, DISPLAY_TO_CONSOLE } from '../constants/actions.js'
 
 
 const initialState = {
