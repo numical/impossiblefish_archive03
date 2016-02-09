@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { displayToConsole } from '../constants/actions.js'
+import { displayToConsole, toggleConsole } from '../constants/actions.js'
 import { CURSOR } from '../constants/console.js'
 import View from '../views/console.js'
 
