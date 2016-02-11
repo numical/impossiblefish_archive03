@@ -3,13 +3,15 @@ import { displayToConsole, toggleConsole } from '../constants/actions.js'
 import { CURSOR } from '../constants/console.js'
 import View from '../views/console.js'
 
-const INVALID_COMMAND = "Invalid command, type 'help'",
+const DELIMITER = ' ',
+      INVALID_COMMAND = "Invalid command, type 'help'",
       HELP = "Available commands: help, hide console"
 
 const processCommand = ( command , dispatch ) => {
-  const elements = command.split(' '),
+  
+  const elements = command.trim().split( DELIMITER ),
         error = () => dispatch( displayToConsole( CURSOR + command, INVALID_COMMAND ) )
- 
+
   switch( elements.length ) {
     case 1:
       if ( 'help' === elements[0] ) {

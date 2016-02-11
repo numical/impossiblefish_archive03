@@ -10,11 +10,13 @@ import menu from './reducers/menu.js'
 import console from './reducers/console.js'
 import App from './views/app.js'
 
-const rootReducer = combineReducers({ menu, console }),
-      store = createStore( rootReducer ),
-      root = (
-         <Provider store={store}>
-          <App />
-        </Provider> )
+(function(){
+  const rootReducer = combineReducers({ menu, console }),
+        store = createStore( rootReducer ),
+        root = (
+           <Provider store={store}>
+            <App />
+          </Provider> )
 
-render( root, document.getElementById('react-container' ) )
+  render( root, document.getElementById('react-container' ) )
+})()
