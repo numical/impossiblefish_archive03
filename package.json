@@ -3,10 +3,19 @@
   "version": "0.0.1",
   "description": "Model development",
   "main": "index.js",
+  "config": {
+    "client_root_dir": "/home/mikee/sandbox/impossiblefish",
+    "server_root_dir": "/home/mikee/sandbox/impossiblefishserver.git"
+  },
   "scripts": {
     "build": "webpack --devtool source-map --progress --colors",
     "debug": "webpack-dev-server --devtool source-map --inline --progress --colors --content-base public",
-    "deploy": "NODE_ENV=production webpack -p"
+    "predeploy": "NODE_ENV=production webpack -p",
+    "deploy:clean": "rm $npm_package_config_server_root_dir/public/* & echo 'old deployment deleted'",
+    "deploy:copy": "cp $npm_package_config_client_root_dir/dist/* $npm_package_config_server_root_dir/public/ & echo 'new deployment copied'",
+    "deploy:commit": ".$npm_package_config_server_root_dir/git_add.sh & .$npm_package_config_server_root_dir/git_commit.sh & echo 'new deployment committed'",
+    "deploy:push": ".$npm_package_config_server_root_dir/git_push.sh & 'new deployment pushed to server'",
+    "deploy" : "npm run deploy:clean & npm run deploy:copy & npm run deploy:commit"
   },
   "repository": {
     "type": "git",
