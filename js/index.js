@@ -1,5 +1,9 @@
 // static non-javascript assets for webpack
-require( '../static/impossiblefish.css' );
+require( '../static/impossiblefish.css' )
+
+// polyfills
+require( 'es6-object-assign' ).polyfill()   // webkit and mobile browsers
+require( 'string.prototype.startswith' )    // IE and mobile browsers 
 
 // static javascript assets using es6 modules (transpiled by babel for webpack) 
 import React from 'react'
