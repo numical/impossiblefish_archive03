@@ -19,11 +19,9 @@ const mapDispatchToProps = ( dispatch ) => {
 
 const parseCommand = ( command , dispatch ) => {
 
-  const elements = command.trim().split( DELIMITER ),
-        error = () => dispatch( displayToConsole( INVALID_COMMAND ) )
-
   dispatch( displayToConsole( CURSOR + command ) )
 
+  const elements = command.trim().split( DELIMITER )
   switch( elements.length ) {
     case 1:
       dispatch( parseVerbOnlyCommand( elements[0] ) )
@@ -32,8 +30,12 @@ const parseCommand = ( command , dispatch ) => {
       dispatch( parseVerbNounCommand( elements[0], elements[1] ) )
       break
     default:
-      error()
+      dispatch( error() )
   }
+}
+
+const error = () => {
+  return displayToConsole( INVALID_COMMAND )
 }
 
 const parseVerbOnlyCommand = ( verb ) => {
@@ -41,7 +43,7 @@ const parseVerbOnlyCommand = ( verb ) => {
     case 'help':
       return displayToConsole(  HELP )
     default:
-      error()
+      return error()
   }
 }
 
@@ -52,7 +54,7 @@ const parseVerbNounCommand = ( verb, noun ) => {
     case 'fish':
       return parseFishCommand( verb )
     default:
-      error()
+      return error()
   }
 }
 
@@ -61,7 +63,7 @@ const parseConsoleCommand = ( verb ) => {
     case 'hide':
       return toggleConsole()
     default:
-      error()
+      return error()
   }
 }
 
@@ -72,7 +74,7 @@ const parseFishCommand = ( verb ) => {
     case 'remove':
       return removeFish()
     default:
-      error()
+      return error()
   }
 }
 
