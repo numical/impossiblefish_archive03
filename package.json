@@ -4,8 +4,8 @@
   "description": "Model development",
   "main": "index.js",
   "config": {
-    "client_root_dir": "/home/mikee/sandbox/impossiblefish",
-    "server_root_dir": "/home/mikee/sandbox/impossiblefishserver.git"
+    "client_root_dir": "SET IN .npmrc FILE",
+    "server_root_dir": "SET IN .npmrc FILE"
   },
   "scripts": {
     "dev": "webpack-dev-server --devtool source-map --inline --progress --colors --content-base public",
