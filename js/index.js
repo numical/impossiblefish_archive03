@@ -12,10 +12,11 @@ import { Provider } from 'react-redux'
 import { render } from 'react-dom'
 import menu from './reducers/menu.js'
 import console from './reducers/console.js'
+import fish from './reducers/fish.js'
 import App from './views/app.js'
 
 (function(){
-  const rootReducer = combineReducers({ menu, console }),
+  const rootReducer = combineReducers({ fish, console, menu }),
         store = createStore( rootReducer ),
         root = (
            <Provider store={store}>
