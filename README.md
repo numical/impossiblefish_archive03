@@ -1,6 +1,7 @@
 # Impossible Fish
 
-An exploration of modern full-stack web technologies.
+A playground for web technologies.
+For exploration and training, and perhaps, one day, even innovation.
 
 You can see this running at [www.impossiblefish.com](http://www.impossiblefish.com).
 
