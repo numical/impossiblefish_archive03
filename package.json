@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "webpack-dev-server --devtool source-map --inline --progress --colors --content-base public",
     "debug": "webpack --devtool source-map --progress --colors",
-    "prebuild": "rm $npm_package_config_client_root_dir/dist/*",
+    "prebuild": "rm -f $npm_package_config_client_root_dir/dist/*",
     "build": "NODE_ENV=production webpack -p",
     "predeploy": "rm $npm_package_config_server_root/public/* & cp $npm_package_config_client_root_dir/dist/* $npm_package_config_server_root_dir/public/",
     "deploy": ". $npm_package_config_server_root_dir/scripts/deploy_to_server.sh"
@@ -51,6 +51,7 @@
     "react-dom": "^0.14.7",
     "react-redux": "^4.2.1",
     "redux": "^3.2.1",
+    "seedrandom": "^2.4.2",
     "string.prototype.startswith": "^0.2.0"
   }
 }
