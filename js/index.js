@@ -13,7 +13,7 @@ import { render } from 'react-dom'
 import menu from './reducers/menu.js'
 import console from './reducers/console.js'
 import fish from './reducers/fish.js'
-import App from './components/app.js'
+import App from './views/app.js'
 
 (function(){
   const rootReducer = combineReducers({ fish, console, menu }),

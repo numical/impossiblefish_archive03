@@ -1,18 +1,22 @@
 import { connect } from 'react-redux'
-import { toggleConsole, toggleMenu, addFish } from '../constants/actions.js'
+import { toggleConsole, toggleMenu, addFish, removeFish } from '../constants/actions.js'
 import View from '../views/menu.js'
 
 
 const mapStateToProps = ( state ) => {
   
-  const items = [
-    // add fish
-    { display: 'Add Fish',
-      action: addFish() },
-    // toggle console visibility
-    {  display: state.console.visible? "Hide Console" : "Show Console",
-       action: toggleConsole() }
-  ]
+  const items = []
+
+  items.push( { display: 'Add Fish', 
+                action: addFish() } )
+
+  if ( state.fish.local.length > 0 ){
+    items.push( { display: 'Remove Fish', 
+                  action: removeFish() } )
+  }
+
+  items.push( { display: state.console.visible? "Hide Console" : "Show Console",
+                action: toggleConsole() } );
 
   return {
     visible: state.menu.visible,
