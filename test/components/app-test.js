@@ -4,15 +4,20 @@ import TestUtils from 'react-addons-test-utils'
 import { expect } from 'chai'
 import app from '../../js/components/app.js'
 
-describe('app starts', () => {
+describe('App start', () => {
 
-  it("React container is present", () => {
+  let root
 
-    let element = TestUtils.renderIntoDocument( app() )
-
-    expect( TestUtils.isCompositeComponent( element ) ).to.be.true
-
+  before( () => {
+    root = TestUtils.renderIntoDocument( app() )
   })
 
+  it('React container is present', () => {
+    expect( TestUtils.isCompositeComponent( root ) ).to.be.true
+  })
+
+  it('Canvas is present', () => {
+    expect( TestUtils.findRenderedDOMComponentWithTag( root, 'canvas') ).to.exist
+  })
 })
 

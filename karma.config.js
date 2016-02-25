@@ -9,9 +9,9 @@ module.exports = function (config) {
       'test/**/*-test.js'
     ],
 
-    plugins: [webpack, 'karma-mocha', 'karma-phantomjs-launcher', 'karma-spec-reporter'],
+    plugins: [webpack, 'karma-mocha', 'karma-phantomjs-launcher', 'karma-chrome-launcher', 'karma-firefox-launcher', 'karma-spec-reporter'],
     
-    browsers: [ 'PhantomJS' ],
+    browsers: [ 'PhantomJS', 'Chrome', 'Firefox' ],
     
     preprocessors: {
       'test/**/*-test.js': ['webpack'],
