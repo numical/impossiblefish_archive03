@@ -6,7 +6,8 @@ module.exports = {
  entry: './js/index.js',
  
  output: {
-  path: process.env.NODE_ENV === 'production' ? './dist' : './build',
+  // path: process.env.NODE_ENV === 'production' ? './dist' : './build',
+  path: './build',
   filename: 'impossiblefish.js'
  },
  

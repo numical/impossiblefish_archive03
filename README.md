@@ -1,6 +1,7 @@
 # Impossible Fish
 
 A playground for web technologies.
+
 For exploration and training, and perhaps, one day, even innovation.
 
 You can see this running at [www.impossiblefish.com](http://www.impossiblefish.com).
@@ -11,43 +12,17 @@ Clone the repository and run via npm:
 npm install
 npm run dev
 ```
-
 Then point your browser at `localhost:8080`
 
 ## Technologies Investigated
-Each and everyone of these bullet points is worthy of a 60 minute presentation!
+Primarily javascript, with a dash of CSS3.
 
-### Client
-* [React](http://facebook.github.io/react/)
-* [Redux](http://redux.js.org/)
- * [react bindings](https://github.com/reactjs/react-redux)
-
-### Server
-* [Node](https://nodejs.org)
- * web serving via [express](http://expressjs.com/)
- * security via [helmet](https://www.npmjs.com/package/helmet)
- * different versions via [nvm](https://github.com/creationix/nvm)
-
-### Build
-* [Npm](https://www.npmjs.com/)
- * as a build tool
-* [Webpack](https://webpack.github.io/)
- * in-line styles
- * [post-css](http://postcss.org/) tooling:
- [autoprefixer](https://github.com/postcss/autoprefixer)
- * embedded fonts
- * transpiling via [Babel](https://babeljs.io/)
-* Deployment
- * optimisation
- * cloud via [OpenShift](https://www.openshift.com/)
-
-### Language
-* es6
- * polyfills
- * transpilers
-* CSS3
- * transitions vs animations
- * interactivity via 'hacks'
+See seperate documentation for each of the concerns of this project:
+* [Client](./docs/client.md)
+* [Server](./docs/server.md)
+* [Build](./docs/build.md)
+* [Testing](./docs/test.md)
+* [Language](./docs/language.md)
 
 ## Licence
 

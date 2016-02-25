@@ -10,11 +10,12 @@
   "scripts": {
     "dev": "webpack-dev-server --devtool source-map --inline --progress --colors --content-base public",
     "debug": "webpack --devtool source-map --progress --colors",
-    "test": "karma start --single-run --no-auto-watch karma.config.js",
-    "test-watch": "karma start --auto-watch --no-single-run karma.config.js",
-    "prebuild": "rm -f $npm_package_config_client_root_dir/dist/*",
+    "test:integration": "karma start --single-run --no-auto-watch karma.config.js",
+    "test:integration-watch": "karma start --auto-watch --no-single-run karma.config.js",
+    "test:unit": "echo 'Not yet implemented'",
+    "prebuild": "rm -f $npm_package_config_client_root_dir/build/* & npm run test:integration",
     "build": "NODE_ENV=production webpack -p",
-    "predeploy": "rm $npm_package_config_server_root/public/* & cp $npm_package_config_client_root_dir/dist/* $npm_package_config_server_root_dir/public/",
+    "predeploy": "rm -f $npm_package_config_server_root/public/* & cp $npm_package_config_client_root_dir/build/* $npm_package_config_server_root_dir/public/",
     "deploy": ". $npm_package_config_server_root_dir/scripts/deploy_to_server.sh"
   },
   "repository": {

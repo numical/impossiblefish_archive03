@@ -4,7 +4,7 @@ import TestUtils from 'react-addons-test-utils'
 import { expect } from 'chai'
 import app from '../../js/components/app.js'
 
-describe('App start', () => {
+describe('Startup', () => {
 
   let root
 
