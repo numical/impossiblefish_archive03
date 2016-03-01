@@ -1,6 +1,3 @@
-// static non-javascript assets for webpack
-require( '../static/impossiblefish.css' )
-
 // polyfills & other language extensions
 import 'babel-polyfill'
 
@@ -9,7 +6,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import app from './components/app.js'
 
-// iife to contain & start React
-(function(){
+// iife to scope React instantiation
+(() => {
   render( app(), document.getElementById('react-container') )
 })()

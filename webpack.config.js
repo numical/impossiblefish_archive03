@@ -3,7 +3,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin'),
     
 module.exports = {
  
- entry: './js/index.js',
+ entry: './js/startup-es6hack.js',
  
  output: {
   // path: process.env.NODE_ENV === 'production' ? './dist' : './build',
