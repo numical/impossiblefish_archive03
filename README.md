@@ -18,11 +18,12 @@ Then point your browser at `localhost:8080`
 Primarily javascript, with a dash of CSS3.
 
 See seperate documentation for each of the concerns of this project:
+* [Constraints](./docs/constraints.md)
 * [Client](./docs/client.md)
 * [Server](./docs/server.md)
 * [Build](./docs/build.md)
 * [Testing](./docs/test.md)
-* [Performance](.docs/performance.md')
+* [Performance](./docs/performance.md)
 * [Language](./docs/language.md)
 
 ## Licence
