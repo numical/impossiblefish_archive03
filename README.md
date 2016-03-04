@@ -22,6 +22,7 @@ See seperate documentation for each of the concerns of this project:
 * [Server](./docs/server.md)
 * [Build](./docs/build.md)
 * [Testing](./docs/test.md)
+* [Performance](.docs/performance.md')
 * [Language](./docs/language.md)
 
 ## Licence
