@@ -1,3 +1,5 @@
+require( '../static/impossiblefish.css' )
+
 // polyfills & other language extensions
 import 'babel-polyfill'
 

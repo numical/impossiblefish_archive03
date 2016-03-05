@@ -1,4 +1,5 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin'),
+    ExtractTextPlugin = require("extract-text-webpack-plugin"),
     autoprefixer = require('autoprefixer')
     
 module.exports = {
@@ -17,7 +18,8 @@ module.exports = {
      loader: 'file-loader'
    },
    { test: /\.css$/, 
-     loader: 'style-loader!css-loader!postcss-loader'
+     // loader: 'style-loader!css-loader!postcss-loader'
+     loader: ExtractTextPlugin.extract("style-loader","css-loader","postcss-loader")
    },
    /*
    { test: /\.(png|woff2)$/, 
@@ -39,6 +41,7 @@ module.exports = {
  plugins: [  
   new CopyWebpackPlugin([
    { from: './static/index.html' }
-  ])
+  ]),
+  new ExtractTextPlugin("impossiblefish.css",{ allChunks: true })
  ]
 }
