@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
 html, body, #react-container,  #react-content { 
   height: 100%;
   min-height: 100%;
@@ -154,15 +156,3 @@ canvas {
   border:none;
   outline:none;
 }
-
-/*
-@font-face {
-  font-family: 'Indie Flower';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Indie Flower'),
-       local('IndieFlower'),
-       url(./Indie-Flower.woff2) 
-       format('woff2');
-}
-*/
