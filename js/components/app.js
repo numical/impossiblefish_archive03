@@ -6,12 +6,11 @@ import console from '../reducers/console.js'
 import fish from '../reducers/fish.js'
 import App from '../views/app.js'
 
-const rootReducer = combineReducers({ fish, console, menu }),
-      store = createStore( rootReducer )
+const rootReducer = combineReducers({fish, console, menu})
+const store = createStore(rootReducer)
 
 export default () => (
   <Provider store={store}>
     <App />
   </Provider>
 )
-

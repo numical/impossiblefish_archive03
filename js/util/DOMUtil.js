@@ -1,28 +1,26 @@
-export function getCSSBoxInfo(element){
-
-  let style = window.getComputedStyle( element ),
-      borderTop = parsePixelProperty( style.borderTopWidth ),
-      positionTop = parsePixelProperty( style.top ),
-      borderBottom = parsePixelProperty( style.borderBottomWidth ),
-      positionBottom = positionTop, // parsePixelProperty( style.bottom ) see BUG WORKAROUND below 
-      borderLeft = parsePixelProperty( style.borderLeftWidth ),
-      positionLeft = parsePixelProperty( style.left ),
-      borderRight = parsePixelProperty( style.borderRightWidth ),
-      positionRight = positionLeft // parsePixelProperty( style.right ) see BUG WORKAROUND below
-
+export function getCSSBoxInfo (element) {
+  const style = window.getComputedStyle(element)
+  const borderTop = parsePixelProperty(style.borderTopWidth)
+  const positionTop = parsePixelProperty(style.top)
+  const borderBottom = parsePixelProperty(style.borderBottomWidth)
+  const positionBottom = positionTop // parsePixelProperty( style.bottom ) see BUG WORKAROUND below
+  const borderLeft = parsePixelProperty(style.borderLeftWidth)
+  const positionLeft = parsePixelProperty(style.left)
+  const borderRight = parsePixelProperty(style.borderRightWidth)
+  const positionRight = positionLeft // parsePixelProperty( style.right ) see BUG WORKAROUND below
   return {
     left: borderLeft + positionLeft,
     right: borderRight + positionRight,
     top: borderTop + positionTop,
     bottom: borderBottom + positionBottom,
-    vertical: borderTop + positionTop +  borderBottom + positionBottom,
+    vertical: borderTop + positionTop + borderBottom + positionBottom,
     horizontal: borderLeft + positionLeft + borderRight + positionRight
-  };
+  }
 }
 
 // expects property in 'Npx' format
-function parsePixelProperty( property ) {
- return parseFloat( property.slice( 0, -2 ) );
+function parsePixelProperty (property) {
+  return parseFloat(property.slice(0, -2))
 }
 
 /*

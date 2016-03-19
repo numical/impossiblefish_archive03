@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html>
    <head>
-     <meta charset="utf-8">
-     <title>Impossible Fish</title>
-     <link href='./impossiblefish.css' rel='stylesheet' type='text/css'>
+     <meta charset='UTF-8'>
    </head>
    <body>
      <div id='react-container'>
        <div id='react-content'>
          <header>impossible fish loading</header>
          <div id='fishtank'>
-           <canvas></canvas>
+           <div class='tankBorder'></div>
+           <div class='tankContents fillingTank'></div> 
          </div>
          <footer>Copyright &copy; 2016, Incremental Ltd.</footer>
        </div>
      </div>
-     <script src="impossiblefish.js" async></script>
      <noscript>Sorry, your browser does not support fish tanks!</noscript>
    </body>
 </html>

@@ -10,30 +10,30 @@ module.exports = function (config) {
     ],
 
     plugins: [webpack, 'karma-mocha', 'karma-phantomjs-launcher', 'karma-chrome-launcher', 'karma-firefox-launcher', 'karma-spec-reporter'],
-    
+
     browsers: [ 'PhantomJS', 'Chrome', 'Firefox' ],
-    
+
     preprocessors: {
       'test/**/*-test.js': ['webpack'],
       'js/**/*.js': ['webpack']
     },
-    
+
     reporters: [ 'spec' ],
-    
+
     webpack: {
       module: {
         loaders: [
-         {  test: /\.js$/, 
+          { test: /\.js$/,
             loader: 'babel-loader',
             query: {
               presets: [ 'es2015', 'react' ]
-            }, 
-          exclude: /node_modules/
-         }  
-        ],
+            },
+            exclude: /node_modules/
+          }
+        ]
       }
     },
-    
+
     webpackMiddleware: { noInfo: true }
   })
 }

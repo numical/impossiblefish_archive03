@@ -1,47 +1,41 @@
-var CopyWebpackPlugin = require('copy-webpack-plugin'),
-    ExtractTextPlugin = require("extract-text-webpack-plugin"),
-    autoprefixer = require('autoprefixer')
-    
-module.exports = {
- 
- entry: './js/startup.js',
- 
- output: {
-  // path: process.env.NODE_ENV === 'production' ? './dist' : './build',
-  path: './build',
-  filename: 'impossiblefish.js'
- },
- 
- module: {
-  loaders: [
-   { test: /\.html$/,
-     loader: 'file-loader'
-   },
-   { test: /\.css$/, 
-     // loader: 'style-loader!css-loader!postcss-loader'
-     loader: ExtractTextPlugin.extract("style-loader","css-loader","postcss-loader")
-   },
-   /*
-   { test: /\.(png|woff2)$/, 
-     loader: 'url-loader?limit=20000'
-   },
-   */
-   { test: /\.js$/, 
-     loader: 'babel-loader',
-     query: {
-       presets: [ 'es2015', 'react' ]
-     }, 
-     exclude: /node_modules/
-   }
-  ]
- },
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var autoprefixer = require('autoprefixer')
 
- postcss: [autoprefixer({browsers: ['last 2 versions']} )],
- 
- plugins: [  
-  new CopyWebpackPlugin([
-   { from: './static/index.html' }
-  ]),
-  new ExtractTextPlugin("impossiblefish.css",{ allChunks: true })
- ]
+module.exports = {
+  entry: './js/startup.js',
+
+  output: {
+    path: './build',
+    filename: 'impossiblefish.js'
+  },
+
+  module: {
+    loaders: [
+      { test: /\.html$/,
+        loader: 'file-loader'
+      },
+      { test: /\.css$/,
+        loader: HtmlWebpackPlugin.inline('postcss-loader')
+      },
+      { test: /\.js$/,
+        loader: 'babel-loader',
+        query: {
+          presets: [ 'es2015', 'react' ]
+        },
+        exclude: /node_modules/
+      }
+    ]
+  },
+
+  postcss: [autoprefixer({browsers: ['last 2 versions']})],
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './static/index.template',
+      asyncDefault: true,
+      minify: {
+        minifyCSS: true
+      }
+    })
+  ]
 }

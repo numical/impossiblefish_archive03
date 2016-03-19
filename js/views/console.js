@@ -1,48 +1,52 @@
 import React from 'react'
-import { findDOMNode } from 'react-dom'
 import { CURSOR } from '../constants/console.js'
 
 const ConsoleView = React.createClass({
-
-  render(){
-    if ( !this.props.visible ) return null
+  render () {
+    if (!this.props.visible) return null
     return (
-      <div id='console' contentEditable={true} onKeyPress={this.handleKeyPress} onKeyDown={this.handleKeyDown}>
+      <div
+        id='console'
+        contentEditable
+        onKeyPress={this.handleKeyPress}
+        onKeyDown={this.handleKeyDown}>
         <div contentEditable={false}>
-          {this.props.history.map( (line,index) => <div key={index}>{line}</div> )}
+          {this.props.history.map((line, index) => <div key={index}>{line}</div>)}
         </div>
-        <div key= 'input' ref='input'>{CURSOR}</div>
-      </div> 
+        <div key='input' ref='input'>
+          {CURSOR}
+        </div>
+      </div>
     )
   },
 
-  handleKeyPress( synthKeyEvent ){
-    if ( 'Enter' === synthKeyEvent.key ) {
-      let command = this.refs.input.innerText  
-      if ( command.startsWith( CURSOR ) ) {
-        command = command.substring( CURSOR.length )  
+  handleKeyPress (synthKeyEvent) {
+    if (synthKeyEvent.key === 'Enter') {
+      let command = this.refs.input.innerText
+      if (command.startsWith(CURSOR)) {
+        command = command.substring(CURSOR.length)
       }
-      this.props.processCommand( command )
+      this.props.processCommand(command)
       synthKeyEvent.preventDefault() // important else browers add new child div in response to 'Enter'
     }
   },
 
-  handleKeyDown( synthKeyEvent ){
-    if ( 'Backspace' === synthKeyEvent.key && CURSOR === this.refs.input.innerText ) {
-      synthKeyEvent.preventDefault();
+  handleKeyDown (synthKeyEvent) {
+    if (synthKeyEvent.key === 'Backspace' && CURSOR === this.refs.input.innerText) {
+      synthKeyEvent.preventDefault()
     }
   },
 
-  componentDidUpdate(){ 
-    if ( this.props.visible ) {
-      this.resetInputElement() 
+  componentDidUpdate () {
+    if (this.props.visible) {
+      this.resetInputElement()
     }
   },
 
-  resetInputElement(){
-    const input = this.refs.input,
-          selection = window.getSelection(),
-          range = document.createRange()
+  resetInputElement () {
+    const input = this.refs.input
+    const selection = window.getSelection()
+    const range = document.createRange()
     input.innerText = CURSOR
     input.scrollIntoView()
     // set caret
@@ -51,7 +55,7 @@ const ConsoleView = React.createClass({
     selection.removeAllRanges()
     selection.addRange(range)
   }
-  
+
 })
 
 export default ConsoleView
