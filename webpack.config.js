@@ -1,4 +1,6 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin')
+var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 var autoprefixer = require('autoprefixer')
 
 module.exports = {
@@ -15,7 +17,7 @@ module.exports = {
         loader: 'file-loader'
       },
       { test: /\.css$/,
-        loader: HtmlWebpackPlugin.inline('postcss-loader')
+        loader: StyleExtHtmlWebpackPlugin.inline('postcss-loader')
       },
       { test: /\.js$/,
         loader: 'babel-loader',
@@ -31,11 +33,9 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './static/index.template',
-      asyncDefault: true,
-      minify: {
-        minifyCSS: true
-      }
-    })
+      template: './static/index.template'
+    }),
+    new StyleExtHtmlWebpackPlugin({minify: true}),
+    new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'async'})
   ]
 }
