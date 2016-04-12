@@ -2,12 +2,7 @@ import React from 'react'
 import Menu from '../components/menu.js'
 import { getCSSBoxInfo } from '../util/DOMUtil.js'
 
-const FILL_ANIMATION_DURATION = 2000 * 1.1 // fudge factor to avoid 'blink' on Firefox
-
 const FishtankView = React.createClass({
-  getInitialState () {
-    return { showWater: true }
-  },
 
   calculateHeight () {
     if (this.refs.fishtank) {
@@ -37,7 +32,6 @@ const FishtankView = React.createClass({
     this.setState({ box: box })
     window.addEventListener('resize', this.rerender)
     window.addEventListener('orientationchange', this.rerender)
-    window.setTimeout(() => this.setState({ showWater: false }), FILL_ANIMATION_DURATION)
   },
 
   componentWillUnmount () {
@@ -57,7 +51,6 @@ const FishtankView = React.createClass({
           Sorry, your browser does not support fish tanks!
         </canvas>
         <Menu ref='menu' />
-        {this.state.showWater ? <div id='water' /> : null}
       </div>)
   }
 })
