@@ -1,6 +1,6 @@
 {
   "name": "impossiblefish",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Model development",
   "main": "index.js",
   "config": {
