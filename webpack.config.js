@@ -4,13 +4,11 @@ var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 var autoprefixer = require('autoprefixer')
 
 module.exports = {
-  entry: './js/startup.js',
-
+  entry: './js/start_react.js',
   output: {
     path: './build',
     filename: 'impossiblefish.js'
   },
-
   module: {
     loaders: [
       { test: /\.html$/,
@@ -28,9 +26,7 @@ module.exports = {
       }
     ]
   },
-
   postcss: [autoprefixer({browsers: ['last 2 versions']})],
-
   plugins: [
     new HtmlWebpackPlugin({
       template: './static/index.template'

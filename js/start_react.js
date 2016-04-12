@@ -1,3 +1,5 @@
+'use strict'
+
 require('../static/impossiblefish.css')
 
 // polyfills & other language extensions
@@ -8,7 +10,18 @@ import 'react'
 import { render } from 'react-dom'
 import app from './components/app.js'
 
-// iife to scope React instantiation
-;(() => {
+const STARTUP_GRAPHIC_DURATION = 2000
+
+function startReact () {
   render(app(), document.getElementById('react-container'))
+}
+
+// iife to scope React instantiation
+(() => {
+  let loadTime = Date.now() - window.impossiblefishstartuptime
+  if (loadTime > STARTUP_GRAPHIC_DURATION) {
+    startReact()
+  } else {
+    setTimeout(startReact, STARTUP_GRAPHIC_DURATION - loadTime)
+  }
 })()
