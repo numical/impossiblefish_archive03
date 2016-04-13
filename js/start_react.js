@@ -10,6 +10,7 @@ import 'react'
 import { render } from 'react-dom'
 import app from './components/app.js'
 
+const STARTUP_TIME = require('./constants/startuptime.js')
 const STARTUP_GRAPHIC_DURATION = 2000
 
 function startReact () {
@@ -18,7 +19,7 @@ function startReact () {
 
 // iife to scope React instantiation
 (() => {
-  let loadTime = Date.now() - window.impossiblefishstartuptime
+  let loadTime = Date.now() - window[STARTUP_TIME]
   if (loadTime > STARTUP_GRAPHIC_DURATION) {
     startReact()
   } else {

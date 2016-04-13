@@ -2,7 +2,6 @@
 <html>
    <head>
      <meta charset='UTF-8'>
-     <script>window.impossiblefishstartuptime=Date.now()</script>
    </head>
    <body>
      <div id='react-container'>

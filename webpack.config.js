@@ -4,10 +4,13 @@ var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 var autoprefixer = require('autoprefixer')
 
 module.exports = {
-  entry: './js/start_react.js',
+  entry: {
+    impossiblefish: './js/start_react.js',
+    inline: './js/inline.js'
+  },
   output: {
     path: './build',
-    filename: 'impossiblefish.js'
+    filename: '[name].js'
   },
   module: {
     loaders: [
@@ -31,7 +34,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './static/index.template'
     }),
-    new StyleExtHtmlWebpackPlugin({minify: true}),
-    new ScriptExtHtmlWebpackPlugin({defaultAttribute: 'async'})
+    new StyleExtHtmlWebpackPlugin({
+      minify: true
+    }),
+    new ScriptExtHtmlWebpackPlugin({
+      inline: ['inline'],
+      defaultAttribute: 'async'
+    })
   ]
 }

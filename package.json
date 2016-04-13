@@ -3,14 +3,18 @@
   "version": "0.0.2",
   "description": "Model development",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "constant.js"
+  ],
   "config": {
     "client_root_dir": "SET IN .npmrc FILE",
     "server_root_dir": "SET IN .npmrc FILE"
   },
   "scripts": {
     "dev": "webpack-dev-server --devtool source-map --inline --progress --colors --content-base public",
-    "debug": "webpack --devtool source-map --progress --colors",
     "style": "standard",
+    "debug": "node-debug webpack --optimize-minimize",
     "pretest:unit": "npm run style -s",
     "test:unit": "echo 'Unit tests not yet implemented'",
     "pretest:integration": "npm run test:unit -s",
@@ -18,7 +22,8 @@
     "test:integration-watch": "karma start --auto-watch --no-single-run karma.config.js",
     "prebuild": "rm -f $npm_package_config_client_root_dir/build/* & npm run test:integration -s",
     "build": "NODE_ENV=production webpack -p",
-    "quickbuild": "rm -f $npm_package_config_client_root_dir/build/* & NODE_ENV=production webpack -p",
+    "build:debug": "webpack --devtool source-map --progress --colors",
+    "build:quick": "rm -f $npm_package_config_client_root_dir/build/* & NODE_ENV=production webpack -p",
     "predeploy": "rm -f $npm_package_config_server_root/public/* & cp $npm_package_config_client_root_dir/build/* $npm_package_config_server_root_dir/public/",
     "deploy": ". $npm_package_config_server_root_dir/scripts/deploy_to_server.sh"
   },
