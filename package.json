@@ -12,7 +12,8 @@
     "server_root_dir": "SET IN .npmrc FILE"
   },
   "scripts": {
-    "dev": "webpack-dev-server --devtool source-map --inline --progress --colors --content-base public",
+    "dev": "webpack-dev-server --devtool source-map --progress --colors --content-base public",
+    "dev:inline": "webpack-dev-server --devtool source-map --inline --progress --colors --content-base public",
     "style": "standard",
     "debug": "node-debug webpack --optimize-minimize",
     "pretest:unit": "npm run style -s",
@@ -74,7 +75,7 @@
     "uglify-js": "^2.6.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.0"
+    "webpack-dev-server": "1.14.0"
   },
   "dependencies": {
     "react": "^0.14.7",

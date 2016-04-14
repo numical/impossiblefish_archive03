@@ -32,7 +32,8 @@ module.exports = {
   postcss: [autoprefixer({browsers: ['last 2 versions']})],
   plugins: [
     new HtmlWebpackPlugin({
-      template: './static/index.template'
+      template: './static/index.template',
+      cache: false
     }),
     new StyleExtHtmlWebpackPlugin({
       minify: true
