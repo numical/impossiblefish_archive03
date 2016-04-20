@@ -35,7 +35,7 @@ footer {
   position: relative;
 }
 
-.tankContents, .tankBorder {
+.tankBorder, .tankFilling, canvas {
   position: absolute;
   top: 3px;
   bottom: 3px;
@@ -43,20 +43,15 @@ footer {
   right: 3px;
 }
 
-.tankContents {
-  opacity: 0.5;
-  z-index: 1;
-}
-
 .tankBorder {
   border-style: solid;
   border-width: 3px; /* must be in px for javascript in entry.js */
   border-radius: 50px;
   border-color: black;
-
+  z-index: 1;
 }
 
-.fillingTank {
+.tankFilling {
   animation-duration: 2s;
   animation-name: fillTank;
   animation-fill-mode: forwards;
@@ -79,8 +74,8 @@ footer {
   }
 }
 
-.filledTank {
-  background-color: lightblue;
+canvas {
+  border-radius: 50px;
 }
 
 #menu {

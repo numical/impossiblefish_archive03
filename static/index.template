@@ -9,7 +9,7 @@
          <header>impossible fish loading</header>
          <div id='fishtank'>
            <div class='tankBorder'></div>
-           <div class='tankContents fillingTank'></div> 
+           <div class='tankFilling'></div> 
          </div>
          <footer>Copyright &copy; 2016, Incremental Ltd.</footer>
        </div>

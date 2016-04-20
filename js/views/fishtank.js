@@ -6,6 +6,7 @@ import Fish from './fish.js'
 
 const FISHTANK = 'fishtank'
 const CANVAS = 'canvas'
+const CANVAS_STYLE = {background: 'lightblue'}
 const RESIZE_EVENTS = ['resize', 'orientationchange']
 
 const FishtankView = React.createClass({
@@ -53,8 +54,9 @@ const FishtankView = React.createClass({
     return (
       <div id={FISHTANK} ref={FISHTANK}>
         <Stage
-          className='tankContents tankBorder filledTank'
+          className='tankBorder'
           ref={CANVAS}
+          style={CANVAS_STYLE}
           height={this.calculateHeight()}
           width={this.calculateWidth()}
           onClick={this.props.click}>
