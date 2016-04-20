@@ -1,56 +1,67 @@
 import React from 'react'
-import Menu from '../components/menu.js'
+import { findDOMNode } from 'react-dom'
+import { Stage, Layer } from 'react-konva'
 import { getCSSBoxInfo } from '../util/DOMUtil.js'
+import Fish from './fish.js'
+
+const FISHTANK = 'fishtank'
+const CANVAS = 'canvas'
+const RESIZE_EVENTS = ['resize', 'orientationchange']
 
 const FishtankView = React.createClass({
 
   calculateHeight () {
-    if (this.refs.fishtank) {
-      return this.refs.fishtank.clientHeight - this.state.box.vertical
+    if (this.refs[FISHTANK]) {
+      return this.refs[FISHTANK].clientHeight - this.state.box.vertical
     } else {
       return 0
     }
   },
 
   calculateWidth () {
-    if (this.refs.fishtank) {
-      return this.refs.fishtank.clientWidth - this.state.box.horizontal
+    if (this.refs[FISHTANK]) {
+      return this.refs[FISHTANK].clientWidth - this.state.box.horizontal
     } else {
       return 0
     }
   },
 
   rerender () {
-    if (this.refs.canvas.width >= this.refs.fishtank.clientWidth) {
+    if (this.refs[CANVAS].width >= this.refs[FISHTANK].clientWidth) {
       this.setState(this.state)
     }
     this.setState(this.state)
   },
 
   componentDidMount () {
-    const box = getCSSBoxInfo(this.refs.canvas)
+    const box = getCSSBoxInfo(findDOMNode(this.refs[CANVAS]))
     this.setState({ box: box })
-    window.addEventListener('resize', this.rerender)
-    window.addEventListener('orientationchange', this.rerender)
+    RESIZE_EVENTS.forEach((event) => {
+      window.addEventListener(event, this.rerender)
+      window.addEventListener(event, this.rerender)
+    })
   },
 
   componentWillUnmount () {
-    window.removeEventListener('resize', this.rerender)
-    window.removeEventListener('orientationchange', this.rerender)
+    RESIZE_EVENTS.forEach((event) => {
+      window.removeEventListener(event, this.rerender)
+      window.removeEventListener(event, this.rerender)
+    })
   },
 
   render () {
     return (
-      <div id='fishtank' ref='fishtank'>
-        <canvas
+      <div id={FISHTANK} ref={FISHTANK}>
+        <Stage
           className='tankContents tankBorder filledTank'
-          ref='canvas'
+          ref={CANVAS}
           height={this.calculateHeight()}
           width={this.calculateWidth()}
           onClick={this.props.click}>
-          Sorry, your browser does not support fish tanks!
-        </canvas>
-        <Menu ref='menu' />
+          <Layer>
+            <Fish/>
+          </Layer>
+        </Stage>
       </div>)
   }
 })

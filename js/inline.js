@@ -1,3 +1,3 @@
 'use strict'
-const STARTUP_TIME = require('./constants/startuptime.js')
+import STARTUP_TIME from './constants/startuptime.js'
 window[STARTUP_TIME] = Date.now()

@@ -1,2 +1,2 @@
 'use strict'
-module.exports = Symbol.for('impossiblefishstartuptime')
+export default Symbol.for('impossiblefishstartuptime')
