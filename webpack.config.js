@@ -1,6 +1,7 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin')
 var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+var FavIconsWebpackPlugin = require('favicons-webpack-plugin')
 var autoprefixer = require('autoprefixer')
 
 module.exports = {
@@ -41,6 +42,13 @@ module.exports = {
     new ScriptExtHtmlWebpackPlugin({
       inline: ['inline'],
       defaultAttribute: 'async'
+    }),
+    new FavIconsWebpackPlugin({
+      logo: './static/impossiblefish.png',
+      prefix: 'icons/',
+      filename: 'iconstats.json',
+      inject: true,
+      name: 'impossible fish'
     })
   ]
 }
