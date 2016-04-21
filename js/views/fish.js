@@ -2,6 +2,7 @@ import React from 'react'
 import {Shape} from 'react-konva'
 
 const Fish = React.createClass({
+
   render () {
     return (
       <Shape fill='#00D2FF' draggable

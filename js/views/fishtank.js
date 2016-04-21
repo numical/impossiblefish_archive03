@@ -52,14 +52,13 @@ const FishtankView = React.createClass({
 
   render () {
     return (
-      <div id={FISHTANK} ref={FISHTANK}>
+      <div id={FISHTANK} ref={FISHTANK} onClick={this.props.click}>
         <Stage
           className='tankBorder'
           ref={CANVAS}
           style={CANVAS_STYLE}
           height={this.calculateHeight()}
-          width={this.calculateWidth()}
-          onClick={this.props.click}>
+          width={this.calculateWidth()}>
           <Layer>
             <Fish/>
           </Layer>
