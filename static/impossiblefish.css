@@ -78,17 +78,21 @@ canvas {
   border-radius: 50px;
 }
 
-#menu {
-  position: fixed;
+#menu-container{
+  position: absolute;
   left: 50%;
   top: 50%;
-  height: 400px;
-  width: 400px;
-  margin-top: -200px;
-  margin-left: -200px;
+  height: 50%;
+  width: 50%;
+}
+
+#menu {
+  position: absolute;
+  left: -50%;
+  top: -50%;
+  height: 100%;
+  width: 100%;
   z-index: 2;
-  border: 3px solid;
-  border-radius: 50px;
   text-align: center;
   font-family: "Indie Flower", cursive;
   font-size: 2em;
@@ -124,11 +128,9 @@ canvas {
 @keyframes alternatingMenu {
   0% {
     color: white;
-    border-color: white;
   }
   100% {
     color: rgb(249,205,27);
-    border-color: rgb(249,205,27);
   }
 }
 
