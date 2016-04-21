@@ -56,7 +56,7 @@ footer {
   animation-name: fillTank;
   animation-fill-mode: forwards;
   border-style: none;
-  background-color: lightblue;
+  background-color: #E0EEEE;
   z-index: 0;
 }
 
@@ -79,12 +79,16 @@ canvas {
 }
 
 #menu {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  height: 400px;
+  width: 400px;
+  margin-top: -200px;
+  margin-left: -200px;
   z-index: 2;
-  border-color: rgb(249,205,27);
+  border: 3px solid;
+  border-radius: 50px;
   text-align: center;
   font-family: "Indie Flower", cursive;
   font-size: 2em;
@@ -119,10 +123,12 @@ canvas {
 
 @keyframes alternatingMenu {
   0% {
-    color: white;              
+    color: white;
+    border-color: white;
   }
   100% {
     color: rgb(249,205,27);
+    border-color: rgb(249,205,27);
   }
 }
 

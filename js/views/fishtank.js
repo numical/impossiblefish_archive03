@@ -6,7 +6,7 @@ import Fish from './fish.js'
 
 const FISHTANK = 'fishtank'
 const CANVAS = 'canvas'
-const CANVAS_STYLE = {background: 'lightblue'}
+const CANVAS_STYLE = {background: '#E0EEEE'}
 const RESIZE_EVENTS = ['resize', 'orientationchange']
 
 const FishtankView = React.createClass({
