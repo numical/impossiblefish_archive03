@@ -7,10 +7,10 @@ import Footer from './footer.js'
 
 export default () => (
   <div id='react-content'>
-    <Header/>
-    <Console/>
-    <Fishtank/>
-    <Menu/>
-    <Footer/>
+    <Header />
+    <Console />
+    <Fishtank />
+    <Menu />
+    <Footer />
   </div>
 )

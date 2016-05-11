@@ -58,7 +58,7 @@ const FishtankView = React.createClass({
           height={this.calculateHeight()}
           width={this.calculateWidth()}>
           <Layer>
-            <Fish/>
+            <Fish />
           </Layer>
         </Stage>
       </div>)
