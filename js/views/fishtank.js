@@ -39,13 +39,11 @@ const FishtankView = React.createClass({
     this.setState({ box: box })
     RESIZE_EVENTS.forEach((event) => {
       window.addEventListener(event, this.rerender)
-      window.addEventListener(event, this.rerender)
     })
   },
 
   componentWillUnmount () {
     RESIZE_EVENTS.forEach((event) => {
-      window.removeEventListener(event, this.rerender)
       window.removeEventListener(event, this.rerender)
     })
   },

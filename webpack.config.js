@@ -46,9 +46,21 @@ module.exports = {
     new FavIconsWebpackPlugin({
       logo: './static/impossiblefish.png',
       prefix: 'icons/',
-      filename: 'iconstats.json',
+      emitStats: false,
       inject: true,
-      name: 'impossible fish'
+      title: 'impossible fish',
+      icons: {
+        android: false,
+        appleIcon: false,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: false,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
     })
   ]
 }
