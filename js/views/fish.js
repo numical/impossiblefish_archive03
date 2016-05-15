@@ -8,12 +8,23 @@ const FEM = FISH_UNIT * FISH_SCALE
 const Fish = React.createClass({
 
   getInitialState () {
-    return {rotation: 0}
+    return {
+      x: 0,
+      y: 300,
+      rotation: 0,
+      bounds: {
+        x: 1200,
+        y: 600
+      }
+    }
   },
 
   progressAnimation () {
-    let rotation = (this.state.rotation > 359) ? 0 : this.state.rotation + 1
-    this.setState({rotation: rotation})
+    const rotation = (this.state.rotation > 359) ? 0 : this.state.rotation + FEM
+    const x = (this.state.x >= this.state.bounds.x ) ? 0 : this.state.x + FEM
+    const y = (this.state.y >= this.state.bounds.y ) ? 0 : this.state.y + FEM/2
+    const state = Object.assign({}, this.state, {x: x, y: y, rotation: rotation})
+    this.setState(state)
     window.requestAnimationFrame(this.progressAnimation)
   },
 
@@ -23,19 +34,21 @@ const Fish = React.createClass({
 
   render () {
     return (
-      <Shape fill='#00D2FF' rotation={this.state.rotation}  draggable
-        sceneFunc={function (ctx) {
-          const x = 200
-          const y = 200
+      <Shape 
+        x = {this.state.x}
+        y = {this.state.y}
+        rotation = {this.state.rotation}  
+        //draggable
+        drawFunc={function (ctx) {
           ctx.lineWidth = 2
           ctx.strokeStyle = 'yellow'
           ctx.beginPath()
-          ctx.moveTo(x, y)
-          ctx.quadraticCurveTo(x + 4 * FEM, y - 4 * FEM, x + 10 * FEM, y + 2 * FEM)
-          ctx.moveTo(x, y)
-          ctx.quadraticCurveTo(x + 4 * FEM, y + 4 * FEM, x + 10 * FEM, y - 2 * FEM)
-          ctx.moveTo(x + 1 * FEM, y)
-          ctx.lineTo(x + 2 * FEM, y)
+          ctx.moveTo(-5 * FEM, 0)
+          ctx.quadraticCurveTo(-1 * FEM, -4 * FEM, 5 * FEM, 2 * FEM)
+          ctx.moveTo(-5 * FEM, 0)
+          ctx.quadraticCurveTo(-1 * FEM, 4 * FEM, 5 * FEM, -2 * FEM)
+          ctx.moveTo(-4 * FEM, 0)
+          ctx.lineTo(-3 * FEM, 0)
           ctx.stroke()
         }}
       />

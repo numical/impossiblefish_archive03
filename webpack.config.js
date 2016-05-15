@@ -37,6 +37,11 @@ module.exports = {
       cache: false
     }),
     new StyleExtHtmlWebpackPlugin({
+      /*
+      minify: {
+        processImport: false
+      }
+      */
       minify: true
     }),
     new ScriptExtHtmlWebpackPlugin({
