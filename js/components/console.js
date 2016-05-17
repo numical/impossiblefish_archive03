@@ -10,7 +10,7 @@ const HELP_NO_FISH = 'Available commands: help, hide console, add fish'
 const NO_FISH = 'There are no fish to remove'
 
 const mapStateToProps = (state) => {
-  return Object.assign({}, state.console, { existingFish: state.fish.local.length > 0 })
+  return Object.assign({}, state.console, { existingFish: state.fishtank.fish.length > 0 })
 }
 
 // framework would do this by default - but this is more explicit

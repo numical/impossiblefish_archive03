@@ -10,24 +10,16 @@ export default (state = initialState, action) => {
     case TOGGLE_CONSOLE:
       return Object.assign({}, state, { visible: !state.visible })
     case DISPLAY_TO_CONSOLE:
-      return Object.assign({}, state, { history: displayToConsole(state, action) })
+      return addToStateHistory(state, action.lines)
     case ADD_FISH:
-      return Object.assign({}, state, { history: addFish(state, action) })
+      return addToStateHistory(state, ['Fish added'])
     case REMOVE_FISH:
-      return Object.assign({}, state, { history: removeFish(state, action) })
+      return addToStateHistory(state, ['Fish removed'])
     default:
       return state
   }
 }
 
-const displayToConsole = (state, action) => {
-  return state.history.concat(action.lines)
-}
-
-const addFish = (state, action) => {
-  return state.history.concat(['Fish added'])
-}
-
-const removeFish = (state, action) => {
-  return state.history.concat(['Fish removed'])
+const addToStateHistory = (state, lines) => {
+  return Object.assign({}, state, { history: state.history.concat(lines) })
 }

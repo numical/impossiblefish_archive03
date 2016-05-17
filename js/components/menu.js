@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
     display: 'Add Fish',
     action: addFish()
   })
-  if (state.fish.local.length > 0) {
+  if (state.fishtank.fish.length > 0) {
     items.push({
       display: 'Remove Fish',
       action: removeFish()

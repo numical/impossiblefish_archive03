@@ -12,3 +12,9 @@ export const addFish = () => ({type: ADD_FISH})
 
 export const REMOVE_FISH = 'REMOVE_FISH'
 export const removeFish = () => ({type: REMOVE_FISH})
+
+export const RESIZE = 'RESIZE'
+export const resize = () => ({type: RESIZE})
+
+export const ANIMATE = 'ANIMATE'
+export const animate = () => ({type: ANIMATE})
