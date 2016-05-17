@@ -1,61 +1,55 @@
 import React from 'react'
 import { findDOMNode } from 'react-dom'
 import { Stage, Layer, Shape } from 'react-konva'
-import { getCSSBoxInfo } from '../util/DOMUtil.js'
+import { getCSSBoxInfo, getFirstChildWithTag } from '../util/DOMUtil.js'
 
 const FISHTANK = 'fishtank'
-const CANVAS = 'canvas'
-const CANVAS_STYLE = {background: '#E0EEEE'}
+const CANVAS_CONTAINER = 'canvas'
+const CANVAS_CONTAINER_STYLE = {background: '#E0EEEE'}
+const CANVAS_CONTAINER_CLASS = 'tankBorder'
+const CANVAS_TAG = 'CANVAS'
 const RESIZE_EVENTS = ['resize', 'orientationchange']
 
 const FishtankView = React.createClass({
 
-  calculateHeight () {
-    if (this.refs[FISHTANK]) {
-      return this.refs[FISHTANK].clientHeight - this.state.box.vertical
-    } else {
-      return 0
-    }
-  },
-
-  calculateWidth () {
-    if (this.refs[FISHTANK]) {
-      return this.refs[FISHTANK].clientWidth - this.state.box.horizontal
-    } else {
-      return 0
-    }
-  },
-
-  rerender () {
-    if (this.refs[CANVAS].width >= this.refs[FISHTANK].clientWidth) {
-      this.setState(this.state)
-    }
-    this.setState(this.state)
-  },
-
   componentDidMount () {
-    const box = getCSSBoxInfo(findDOMNode(this.refs[CANVAS]))
-    this.setState({ box: box })
-    RESIZE_EVENTS.forEach((event) => {
-      window.addEventListener(event, this.rerender)
-    })
+    const canvasContainer = findDOMNode(this.refs[CANVAS_CONTAINER])
+    const state = {
+      box: getCSSBoxInfo(canvasContainer),
+      canvas: getFirstChildWithTag(canvasContainer, CANVAS_TAG)
+    }
+    const autoResize = () => {
+      this.resize()
+      RESIZE_EVENTS.forEach((event) => {
+        window.addEventListener(event, this.resize)
+      })
+    }
+    this.setState(state, autoResize)
   },
 
   componentWillUnmount () {
     RESIZE_EVENTS.forEach((event) => {
-      window.removeEventListener(event, this.rerender)
+      window.removeEventListener(event, this.resize)
     })
+  },
+
+  resize () {
+    if (this.state.canvas.width >= this.props.width | this.state.canvas.height >= this.props.height) {
+      const width = this.refs[FISHTANK].clientWidth - this.state.box.horizontal
+      const height = this.refs[FISHTANK].clientHeight - this.state.box.vertical
+      this.props.resize(width, height)
+    }
   },
 
   render () {
     return (
       <div id={FISHTANK} ref={FISHTANK} onClick={this.props.click}>
         <Stage
-          className='tankBorder'
-          ref={CANVAS}
-          style={CANVAS_STYLE}
-          height={this.calculateHeight()}
-          width={this.calculateWidth()}>
+          ref={CANVAS_CONTAINER}
+          className={CANVAS_CONTAINER_CLASS}
+          style={CANVAS_CONTAINER_STYLE}
+          height={this.props.height}
+          width={this.props.width}>
           <Layer>
             {this.props.fish.map(renderFish)}
           </Layer>

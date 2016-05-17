@@ -13,8 +13,8 @@ export const addFish = () => ({type: ADD_FISH})
 export const REMOVE_FISH = 'REMOVE_FISH'
 export const removeFish = () => ({type: REMOVE_FISH})
 
-export const RESIZE = 'RESIZE'
-export const resize = () => ({type: RESIZE})
+export const RESIZE_TANK = 'RESIZE_TANK'
+export const resizeTank = (width, height) => ({type: RESIZE_TANK, width: width, height: height})
 
 export const ANIMATE = 'ANIMATE'
 export const animate = () => ({type: ANIMATE})

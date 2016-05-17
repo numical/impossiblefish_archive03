@@ -1,4 +1,4 @@
-import { ADD_FISH, REMOVE_FISH, ANIMATE } from '../constants/actions.js'
+import { ADD_FISH, REMOVE_FISH, ANIMATE, RESIZE_TANK } from '../constants/actions.js'
 
 const FISH_UNIT = 6
 const FISH_SCALE = 1
@@ -6,8 +6,8 @@ const FISH_SCALE = 1
 const initialState = {
   fish: [],
   size: {
-    x: 1200,
-    y: 600
+    width: 0,
+    height: 0
   }
 }
 
@@ -17,6 +17,8 @@ export default (state = initialState, action) => {
       return updateFishState(state, addFish)
     case REMOVE_FISH:
       return updateFishState(state, removeFish)
+    case RESIZE_TANK:
+      return Object.assign({}, state, {size: {width: action.width, height: action.height}})
     case ANIMATE:
       return (state.fish.length === 0)
              ? state
@@ -49,8 +51,8 @@ const removeFish = (fishtank) => {
 const animateFish = (fishtank) => {
   return fishtank.fish.map((fish) => {
     return Object.assign({}, fish, {
-      x: (fish.x >= fishtank.size.x) ? 0 : fish.x + fish.FEM,
-      y: (fish.y >= fishtank.size.y) ? 0 : fish.y + fish.FEM / 2,
+      x: (fish.x >= fishtank.size.width) ? 0 : fish.x + fish.FEM,
+      y: (fish.y >= fishtank.size.height) ? 0 : fish.y + fish.FEM / 2,
       rotation: (fish.rotation > 359) ? 0 : fish.rotation + 1
     })
   })

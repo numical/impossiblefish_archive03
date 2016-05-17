@@ -29,3 +29,8 @@ function parsePixelProperty (property) {
  * We cannot use style.bottom and style.right as on Chrome they appear as the defined
  * figure but on Firefox as a calculated figure (probably absolute px).
  */
+
+export function getFirstChildWithTag (parent, tag) {
+  const child = parent.firstChild
+  return (child.nodeName === tag) ? child : getFirstChildWithTag(child, tag)
+}
