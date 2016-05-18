@@ -1,22 +1,17 @@
 import React from 'react'
-import { createStore, combineReducers } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 import menu from '../reducers/menu.js'
 import console from '../reducers/console.js'
 import fishtank from '../reducers/fishtank.js'
-import { animate } from '../constants/actions.js'
+import animation from '../reducers/animation.js'
 import App from '../views/app.js'
 
-const rootReducer = combineReducers({fishtank, console, menu})
-const store = createStore(rootReducer)
+const rootReducer = combineReducers({fishtank, console, menu, animation})
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
-export default (window) => {
-  // animation
-  const animation = () => {
-    store.dispatch(animate())
-    window.requestAnimationFrame(animation)
-  }
-  window.requestAnimationFrame(animation)
+export default () => {
   // render
   return (
     <Provider store={store}>

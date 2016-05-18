@@ -20,9 +20,7 @@ export default (state = initialState, action) => {
     case RESIZE_TANK:
       return Object.assign({}, state, {size: {width: action.width, height: action.height}})
     case ANIMATE:
-      return (state.fish.length === 0)
-             ? state
-             : updateFishState(state, animateFish)
+      return updateFishState(state, animateFish)
     default:
       return state
   }

@@ -14,7 +14,7 @@ import STARTUP_TIME from './constants/startuptime.js'
 const STARTUP_GRAPHIC_DURATION = 2000
 
 function startReact () {
-  render(app(window), document.getElementById('react-container'))
+  render(app(), document.getElementById('react-container'))
 }
 
 // iife to scope React instantiation

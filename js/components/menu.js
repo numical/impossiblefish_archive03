@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { toggleConsole, toggleMenu, addFish, removeFish } from '../constants/actions.js'
+import { toggleConsole, toggleMenu, addFish, removeFish, playAnimation, pauseAnimation } from '../constants/actions.js'
 import View from '../views/menu.js'
 
 const mapStateToProps = (state) => {
@@ -13,6 +13,17 @@ const mapStateToProps = (state) => {
       display: 'Remove Fish',
       action: removeFish()
     })
+    if (state.animation.playing) {
+      items.push({
+        display: 'Pause',
+        action: pauseAnimation()
+      })
+    } else {
+      items.push({
+        display: 'Play',
+        action: playAnimation()
+      })
+    }
   }
   items.push({
     display: state.console.visible ? 'Hide Console' : 'Show Console',
