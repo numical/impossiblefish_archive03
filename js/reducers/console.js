@@ -1,4 +1,4 @@
-import { TOGGLE_CONSOLE, DISPLAY_TO_CONSOLE, ADD_FISH, REMOVE_FISH } from '../constants/actions.js'
+import { TOGGLE_CONSOLE, DISPLAY_TO_CONSOLE } from '../actions/console.js'
 
 const initialState = {
   visible: false,
@@ -11,12 +11,8 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, { visible: !state.visible })
     case DISPLAY_TO_CONSOLE:
       return addToStateHistory(state, action.lines)
-    case ADD_FISH:
-      return addToStateHistory(state, ['Fish added'])
-    case REMOVE_FISH:
-      return addToStateHistory(state, ['Fish removed'])
     default:
-      return state
+      return (action.display) ? addToStateHistory(state, [action.display]) : state
   }
 }
 

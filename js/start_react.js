@@ -9,9 +9,7 @@ import 'babel-polyfill'
 import 'react'
 import { render } from 'react-dom'
 import app from './components/app.js'
-import STARTUP_TIME from './constants/startuptime.js'
-
-const STARTUP_GRAPHIC_DURATION = 2000
+import { STARTUP_TIME, STARTUP_ANIMATION_DURATION } from './constants.js'
 
 function startReact () {
   render(app(), document.getElementById('react-container'))
@@ -20,9 +18,9 @@ function startReact () {
 // iife to scope React instantiation
 (() => {
   const loadTime = Date.now() - window[STARTUP_TIME]
-  if (loadTime > STARTUP_GRAPHIC_DURATION) {
+  if (loadTime > STARTUP_ANIMATION_DURATION) {
     startReact()
   } else {
-    setTimeout(startReact, STARTUP_GRAPHIC_DURATION - loadTime)
+    setTimeout(startReact, STARTUP_ANIMATION_DURATION - loadTime)
   }
 })()

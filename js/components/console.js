@@ -1,5 +1,6 @@
-import { displayToConsole, toggleConsole, addFish, removeFish } from '../constants/actions.js'
-import { CURSOR } from '../constants/console.js'
+import { displayToConsole, toggleConsole } from '../actions/console.js'
+import { addFish, removeFish } from '../actions/fishtank.js'
+import { CURSOR } from '../constants.js'
 import View from '../views/console.js'
 import { connect } from 'react-redux'
 

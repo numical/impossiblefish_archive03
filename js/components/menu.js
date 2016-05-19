@@ -1,5 +1,8 @@
 import { connect } from 'react-redux'
-import { toggleConsole, toggleMenu, addFish, removeFish, playAnimation, pauseAnimation } from '../constants/actions.js'
+import { toggleConsole } from '../actions/console.js'
+import { toggleMenu } from '../actions/menu.js'
+import { addFish, removeFish } from '../actions/fishtank.js'
+import { playAnimation, pauseAnimation } from '../actions/animation.js'
 import View from '../views/menu.js'
 
 const mapStateToProps = (state) => {

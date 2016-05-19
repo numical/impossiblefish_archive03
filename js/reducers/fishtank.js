@@ -1,4 +1,5 @@
-import { ADD_FISH, REMOVE_FISH, ANIMATE, RESIZE_TANK } from '../constants/actions.js'
+import { ADD_FISH, REMOVE_FISH, RESIZE_TANK } from '../actions/fishtank.js'
+import { ANIMATE } from '../actions/animation.js'
 
 const FISH_UNIT = 6
 const FISH_SCALE = 1

@@ -1,4 +1,4 @@
-import { PLAY_ANIMATION, PAUSE_ANIMATION, ANIMATE } from '../constants/actions.js'
+import { PLAY_ANIMATION, PAUSE_ANIMATION, ANIMATE } from '../actions/animation.js'
 
 const PAUSED_STATE = {
   playing: false
