@@ -1,7 +1,7 @@
 import React from 'react'
 import { findDOMNode } from 'react-dom'
 import { Stage, Layer, Shape } from 'react-konva'
-import { getCSSBoxInfo, getFirstChildWithTag } from '../util/DOMUtil.js'
+import { getCSSBoxInfo, getFirstChildWithTag } from '../util/DOMHacks.js'
 
 const FISHTANK = 'fishtank'
 const CANVAS_CONTAINER = 'canvas'
@@ -38,6 +38,16 @@ const FishtankView = React.createClass({
       const width = this.refs[FISHTANK].clientWidth - this.state.box.horizontal
       const height = this.refs[FISHTANK].clientHeight - this.state.box.vertical
       this.props.resize(width, height)
+    }
+  },
+
+  // this is here to cause a resize instead of a render if the console is added/removed
+  shouldComponentUpdate (nextProps) {
+    if (nextProps.console === this.props.console) {
+      return true
+    } else {
+      this.resize() // note the dispatched action is async
+      return false
     }
   },
 

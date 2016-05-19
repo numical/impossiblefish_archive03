@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
   return {
     fish: state.fishtank.fish,
     height: state.fishtank.size.height,
-    width: state.fishtank.size.width
+    width: state.fishtank.size.width,
+    console: state.console.visible
   }
 }
 
