@@ -2,6 +2,7 @@ import React from 'react'
 import { findDOMNode } from 'react-dom'
 import { Stage, Layer, Shape } from 'react-konva'
 import { getCSSBoxInfo, getFirstChildWithTag } from '../util/DOMHacks.js'
+import { drawFish } from '../fish/appearance.js'
 
 const FISHTANK = 'fishtank'
 const CANVAS_CONTAINER = 'canvas'
@@ -68,29 +69,16 @@ const FishtankView = React.createClass({
   }
 })
 
-const renderFish = (props) => {
+const renderFish = (fish) => {
   return (
     <Shape
-      key={props.id}
-      x={props.x}
-      y={props.y}
-      rotation={props.rotation}
-      sceneFunc={drawFish.bind(null, props.FEM)}
+      key={fish.id}
+      x={fish.x}
+      y={fish.y}
+      rotation={fish.rotation}
+      sceneFunc={drawFish.bind(null, fish)}
     />
   )
-}
-
-const drawFish = (FEM, ctx) => {
-  ctx.lineWidth = 2
-  ctx.strokeStyle = 'yellow'
-  ctx.beginPath()
-  ctx.moveTo(-5 * FEM, 0)
-  ctx.quadraticCurveTo(-1 * FEM, -4 * FEM, 5 * FEM, 2 * FEM)
-  ctx.moveTo(-5 * FEM, 0)
-  ctx.quadraticCurveTo(-1 * FEM, 4 * FEM, 5 * FEM, -2 * FEM)
-  ctx.moveTo(-4 * FEM, 0)
-  ctx.lineTo(-3 * FEM, 0)
-  ctx.stroke()
 }
 
 export default FishtankView
