@@ -73,8 +73,8 @@ const renderFish = (fish) => {
   return (
     <Shape
       key={fish.id}
-      x={fish.x}
-      y={fish.y}
+      x={fish.pos.x}
+      y={fish.pos.y}
       rotation={fish.rotation}
       sceneFunc={drawFish.bind(null, fish)}
     />
