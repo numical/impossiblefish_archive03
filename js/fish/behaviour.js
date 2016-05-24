@@ -10,31 +10,26 @@ const FEM = FISH_UNIT * FISH_SCALE
 const FISH_ID = new Counter()
 
 export function newFish (fishtank) {
-  const initialPos = {
-    x: randomInt(fishtank.size.width),
-    y: randomInt(fishtank.size.height),
-    rotation: 0
-  }
-  createMovement(initialPos, fishtank)
   return {
     id: FISH_ID.next(),
-    x: initialPos.x,
-    y: initialPos.y,
-    rotation: initialPos.rotation,
-    tweenPos: initialPos,
+    x: randomInt(fishtank.size.width),
+    y: randomInt(fishtank.size.height),
+    rotation: 0,
     FEM: FEM
   }
 }
 
-export function incrementFishPosition (fish, fishtank) {
-  return Object.assign({}, fish, {
-    x: fish.tweenPos.x,
-    y: fish.tweenPos.y,
-    rotation: fish.tweenPos.rotation
+export function animateFish (fishtank) {
+  fishtank.fish.forEach((fish) => {
+    if (!fish.tweenPos) {
+      fish.tweenPos = {x: fish.x, y: fish.y, rotation: fish.rotation}
+      createFishTween(fish.tweenPos, fishtank)
+    }
   })
+  TWEEN.update()
 }
 
-function createMovement (position, fishtank) {
+function createFishTween (position, fishtank) {
   const finalPos = {
     x: randomInt(fishtank.size.width),
     y: randomInt(fishtank.size.height)
@@ -51,7 +46,7 @@ function createMovement (position, fishtank) {
     .to({x: finalPos.x, y: finalPos.y}, durations.movement)
     .easing(TWEEN.Easing.Exponential.Out)
     .onComplete(() => {
-      createMovement(position, fishtank)
+      createFishTween(position, fishtank)
     })
   rotate.chain(move).start()
 }
@@ -70,3 +65,18 @@ function calculateAngle (fromPos, toPos) {
   return Math.floor((Math.atan2(y, x) / Math.PI) * 180)
 }
 
+export function deanimateFish (fishtank) {
+  TWEEN.removeAll()
+  fishtank.fish.forEach((fish) => {
+    delete fish.tweenPos
+  })
+}
+
+export function incrementFishPosition (fish, fishtank) {
+  if (!fish.tweenPos) return fish
+  return Object.assign({}, fish, {
+    x: fish.tweenPos.x,
+    y: fish.tweenPos.y,
+    rotation: fish.tweenPos.rotation
+  })
+}

@@ -1,4 +1,4 @@
-import TWEEN from 'tween.js'
+import { animateFish } from '../fish/behaviour.js'
 
 export const ANIMATE = 'ANIMATE'
 export const animate = (requestId) => ({type: ANIMATE, requestId: requestId})
@@ -9,7 +9,7 @@ export const playAnimation = () => {
     if (getState().animation.playing) return
     const animation = () => {
       const requestId = window.requestAnimationFrame(animation)
-      TWEEN.update()
+      animateFish(getState().fishtank)
       dispatch(animate(requestId))
     }
     dispatch({type: PLAY_ANIMATION, display: 'Animation playing'})
