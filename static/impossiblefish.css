@@ -97,7 +97,7 @@ canvas {
   font-family: "Indie Flower", cursive;
   font-size: 2em;
   animation-name: fadeInMenu, alternatingMenu;
-  animation-duration: 1s, 3s;
+  animation-duration: 500ms, 3s;
   animation-direction: alternate;
   animation-iteration-count: 1, infinite;
   animation-timing-function: linear;
