@@ -45,106 +45,88 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return Object.assign({}, mergedProps, stateAwareDispatchProps)
 }
 
-const parseCommand = (command, dispatch, props) => {
-  dispatch(displayToConsole(get('CONSOLE_CURSOR') + command))
-  const elements = command.trim().split(DELIMITER)
-  switch (elements.length) {
-    case 1:
-      dispatch(parseVerbOnlyCommand(elements[0], props))
-      break
-    case 2:
-      dispatch(parseVerbNounCommand(elements[0], elements[1], props))
-      break
-    default:
-      dispatch(error())
+class Command {
+  constructor (command, action, isApplicable, ...subcommands) {
+    this.command = command
+    this.action = action
+    this.applicable = isApplicable || function () {return true}
+    this.subcommands = subcommands
+    this.isLeaf = !this.subcommands
+  }
+  isApplicable (props) {
+    return true
   }
 }
 
-const parseVerbOnlyCommand = (verb, props) => {
-  switch (verb) {
-    case VERBS.HELP:
-      return displayToConsole(buildHelpString(props))
-    case VERBS.PLAY:
-      return playAnimation()
-    case VERBS.PAUSE:
-      return pauseAnimation()
-    default:
-      return error()
-  }
-}
+const commands = [
+  new Command(
+    'help', 
+    (props) => {displayToConsole(buildHelpString(props))}
+  ),
+  new Command(
+    'hide', 
+    null,
+    null,
+    new Command(
+      'console',
+      hideConsole
+    )
+  ),
+  new Command(
+    'add',
+    null,
+    null,
+    new Command(
+      'fish',
+      addFish
+    )
+  ),
+  new Command(
+    'remove',
+    null,
+    null,
+    new Command(
+      'fish',
+      removeFish,
+      (props) => props.existingFish
+    )
+  ),
+  new Command(
+    'pause',
+    pauseAnimation,
+    (props) => props.playing
+  ),
+  new Command(
+    'play',
+    playAnimation,
+    (props) => !props.playing
+  ),
+  new Command(
+    'finite',
+    null,
+    null,
+    new Command(
+      'tank',
+      finiteTank,
+      (props) => props.infiniteTank
+    )
+  ),
+  new Command(
+    'infinite',
+    null,
+    null,
+    new Command(
+      'tank',
+      infiniteTank,
+      (props) => !props.infiniteTank
+    )
+  )
+]
 
-const parseVerbNounCommand = (verb, noun, props) => {
-  switch (noun) {
-    case NOUNS.CONSOLE:
-      return parseConsoleCommand(verb)
-    case NOUNS.FISH:
-      return parseFishCommand(verb, props)
-    case NOUNS.TANK:
-      return parseTankCommand(verb, props)
-    default:
-      return error()
-  }
-}
 
-const error = () => {
-  return displayToConsole(get('CONSOLE_INVALID_COMMAND'))
-}
-
-const buildHelpString = (props) => {
-  const commands = []
-  commands.push(VERBS.HELP)
-  commands.push(VERBS.HIDE + DELIMITER + NOUNS.CONSOLE)
-  commands.push(VERBS.ADD + DELIMITER + NOUNS.FISH)
-  if (props.existingFish) {
-    commands.push(VERBS.REMOVE + DELIMITER + NOUNS.FISH)
-    if (props.playing) {
-      commands.push(VERBS.PAUSE)
-    } else {
-      commands.push(VERBS.PLAY)
-    }
-  }
-  if (props.infiniteTank) {
-    commands.push(VERBS.FINITE + DELIMITER + NOUNS.TANK)
-  } else {
-    commands.push(VERBS.INFINITE + DELIMITER + NOUNS.TANK)
-  }
-  return get('CONSOLE_HELP_INTRO') + commands.join(get('CONSOLE_HELP_DELIMITER'))
-}
-
-const parseConsoleCommand = (verb) => {
-  switch (verb) {
-    case VERBS.HIDE:
-      return hideConsole()
-    default:
-      return error()
-  }
-}
-
-const parseFishCommand = (verb, props) => {
-  switch (verb) {
-    case VERBS.ADD:
-      return addFish()
-    case VERBS.REMOVE:
-      return props.existingFish ? removeFish() : displayToConsole(NO_FISH)
-    default:
-      return error()
-  }
-}
-
-const parseTankCommand = (verb, props) => {
-  switch (verb) {
-    case VERBS.FINITE:
-      return finiteTank()
-    case VERBS.INFINITE:
-      return infiniteTank()
-    default:
-      return error()
-  }
-}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
   mergeProps
 )(View)
-
