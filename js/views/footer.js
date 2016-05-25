@@ -1,7 +1,8 @@
 import React from 'react'
+import { get } from '../util/content.js'
 
 export default () => (
   <footer>
-    Copyright &copy; 2016, Incremental Ltd.
+    {get('COPYRIGHT')}
   </footer>
 )

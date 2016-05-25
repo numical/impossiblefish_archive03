@@ -1,5 +1,7 @@
 import React from 'react'
-import { CURSOR } from '../constants.js'
+import { get } from '../util/content.js'
+
+const CURSOR = get('CONSOLE_CURSOR')
 
 const ConsoleView = React.createClass({
   render () {

@@ -1,11 +1,23 @@
-import { displayToConsole, toggleConsole } from '../actions/console.js'
+import { displayToConsole, hideConsole } from '../actions/console.js'
 import { addFish, removeFish } from '../actions/fishtank.js'
-import { CURSOR } from '../constants.js'
+import { get } from '../util/content.js'
 import View from '../views/console.js'
 import { connect } from 'react-redux'
 
+const NOUNS = {
+  CONSOLE: 'console',
+  FISH: 'fish'
+}
+const VERBS = {
+  HELP: 'help',
+  HIDE: 'hide',
+  ADD: 'add',
+  REMOVE: 'remove'
+}
+
+const CURSOR = get('CONSOLE_CURSOR')
+const INVALID_COMMAND = get('CONSOLE_INVALID_COMMAND')
 const DELIMITER = ' '
-const INVALID_COMMAND = 'Invalid command, type "help"'
 const HELP = 'Available commands: help, hide console, add/remove fish'
 const HELP_NO_FISH = 'Available commands: help, hide console, add fish'
 const NO_FISH = 'There are no fish to remove'
@@ -44,7 +56,7 @@ const parseCommand = (command, dispatch, props) => {
 
 const parseVerbOnlyCommand = (verb, props) => {
   switch (verb) {
-    case 'help':
+    case VERBS.HELP:
       return displayToConsole(buildHelpString(props))
     default:
       return error()
@@ -53,9 +65,9 @@ const parseVerbOnlyCommand = (verb, props) => {
 
 const parseVerbNounCommand = (verb, noun, props) => {
   switch (noun) {
-    case 'console':
+    case NOUNS.CONSOLE:
       return parseConsoleCommand(verb)
-    case 'fish':
+    case NOUNS.FISH:
       return parseFishCommand(verb, props)
     default:
       return error()
@@ -72,8 +84,8 @@ const buildHelpString = (props) => {
 
 const parseConsoleCommand = (verb) => {
   switch (verb) {
-    case 'hide':
-      return toggleConsole()
+    case VERBS.HIDE:
+      return hideConsole()
     default:
       return error()
   }
@@ -81,9 +93,9 @@ const parseConsoleCommand = (verb) => {
 
 const parseFishCommand = (verb, props) => {
   switch (verb) {
-    case 'add':
+    case VERBS.ADD:
       return addFish()
-    case 'remove':
+    case VERBS.REMOVE:
       return props.existingFish ? removeFish() : displayToConsole(NO_FISH)
     default:
       return error()

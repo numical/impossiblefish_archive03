@@ -12,7 +12,7 @@ export const playAnimation = () => {
       animateFish(getState().fishtank)
       dispatch(animate(requestId))
     }
-    dispatch({type: PLAY_ANIMATION, display: 'Animation playing'})
+    dispatch({type: PLAY_ANIMATION})
     animation()
   }
 }
@@ -23,6 +23,6 @@ export const pauseAnimation = () => {
     const {playing, requestId} = getState().animation
     if (!playing) return
     window.cancelAnimationFrame(requestId)
-    dispatch({type: PAUSE_ANIMATION, display: 'Animation paused'})
+    dispatch({type: PAUSE_ANIMATION})
   }
 }

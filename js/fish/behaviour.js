@@ -29,6 +29,22 @@ export function animateFish (fishtank) {
   TWEEN.update()
 }
 
+export function deanimateFish (fishtank) {
+  TWEEN.removeAll()
+  fishtank.fish.forEach((fish) => {
+    delete fish.tweenPos
+  })
+}
+
+export function incrementFishPosition (fish, fishtank) {
+  if (!fish.tweenPos) return fish
+  return Object.assign({}, fish, {
+    x: fish.tweenPos.x,
+    y: fish.tweenPos.y,
+    rotation: fish.tweenPos.rotation
+  })
+}
+
 function createFishTween (position, fishtank) {
   const finalPos = {
     x: randomInt(fishtank.size.width),
@@ -65,18 +81,3 @@ function calculateAngle (fromPos, toPos) {
   return Math.floor((Math.atan2(y, x) / Math.PI) * 180)
 }
 
-export function deanimateFish (fishtank) {
-  TWEEN.removeAll()
-  fishtank.fish.forEach((fish) => {
-    delete fish.tweenPos
-  })
-}
-
-export function incrementFishPosition (fish, fishtank) {
-  if (!fish.tweenPos) return fish
-  return Object.assign({}, fish, {
-    x: fish.tweenPos.x,
-    y: fish.tweenPos.y,
-    rotation: fish.tweenPos.rotation
-  })
-}
