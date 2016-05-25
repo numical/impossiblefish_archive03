@@ -6,12 +6,6 @@ import { get } from '../util/content.js'
 import View from '../views/console.js'
 import { connect } from 'react-redux'
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  mergeProps
-)(View)
-
 const NOUNS = {
   CONSOLE: 'console',
   FISH: 'fish'
@@ -126,3 +120,10 @@ const parseFishCommand = (verb, props) => {
       return error()
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(View)
+
