@@ -1,5 +1,5 @@
 import { displayToConsole, hideConsole } from '../actions/console.js'
-import { addFish, removeFish } from '../actions/fishtank.js'
+import { addFish, removeFish, infiniteTank, finiteTank } from '../actions/fishtank.js'
 import { playAnimation, pauseAnimation } from '../actions/animation.js'
 
 import { get } from '../util/content.js'
@@ -8,7 +8,8 @@ import { connect } from 'react-redux'
 
 const NOUNS = {
   CONSOLE: 'console',
-  FISH: 'fish'
+  FISH: 'fish',
+  TANK: 'tank'
 }
 const VERBS = {
   HELP: 'help',
@@ -16,7 +17,9 @@ const VERBS = {
   ADD: 'add',
   REMOVE: 'remove',
   PLAY: 'play',
-  PAUSE: 'pause'
+  PAUSE: 'pause',
+  INFINITE: 'infinite',
+  FINITE: 'finite'
 }
 const DELIMITER = ' '
 const NO_FISH = 'There are no fish to remove'
@@ -24,9 +27,9 @@ const NO_FISH = 'There are no fish to remove'
 const mapStateToProps = (state) => {
   return Object.assign({}, state.console, {
     existingFish: state.fishtank.fish.length > 0,
-    playing: state.animation.playing
+    playing: state.animation.playing,
+    infiniteTank: state.fishtank.infinite
   })
-  // return Object.assign({}, state.console, { existingFish: state.fishtank.fish.length > 0 })
 }
 
 // framework would do this by default - but this is more explicit
@@ -76,6 +79,8 @@ const parseVerbNounCommand = (verb, noun, props) => {
       return parseConsoleCommand(verb)
     case NOUNS.FISH:
       return parseFishCommand(verb, props)
+    case NOUNS.TANK:
+      return parseTankCommand(verb, props)
     default:
       return error()
   }
@@ -98,6 +103,11 @@ const buildHelpString = (props) => {
       commands.push(VERBS.PLAY)
     }
   }
+  if (props.infiniteTank) {
+    commands.push(VERBS.FINITE + DELIMITER + NOUNS.TANK)
+  } else {
+    commands.push(VERBS.INFINITE + DELIMITER + NOUNS.TANK)
+  }
   return get('CONSOLE_HELP_INTRO') + commands.join(get('CONSOLE_HELP_DELIMITER'))
 }
 
@@ -116,6 +126,17 @@ const parseFishCommand = (verb, props) => {
       return addFish()
     case VERBS.REMOVE:
       return props.existingFish ? removeFish() : displayToConsole(NO_FISH)
+    default:
+      return error()
+  }
+}
+
+const parseTankCommand = (verb, props) => {
+  switch (verb) {
+    case VERBS.FINITE:
+      return finiteTank()
+    case VERBS.INFINITE:
+      return infiniteTank()
     default:
       return error()
   }
