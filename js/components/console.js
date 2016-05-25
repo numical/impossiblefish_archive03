@@ -1,8 +1,16 @@
 import { displayToConsole, hideConsole } from '../actions/console.js'
 import { addFish, removeFish } from '../actions/fishtank.js'
+import { playAnimation, pauseAnimation } from '../actions/animation.js'
+
 import { get } from '../util/content.js'
 import View from '../views/console.js'
 import { connect } from 'react-redux'
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(View)
 
 const NOUNS = {
   CONSOLE: 'console',
@@ -12,18 +20,19 @@ const VERBS = {
   HELP: 'help',
   HIDE: 'hide',
   ADD: 'add',
-  REMOVE: 'remove'
+  REMOVE: 'remove',
+  PLAY: 'play',
+  PAUSE: 'pause'
 }
-
-const CURSOR = get('CONSOLE_CURSOR')
-const INVALID_COMMAND = get('CONSOLE_INVALID_COMMAND')
 const DELIMITER = ' '
-const HELP = 'Available commands: help, hide console, add/remove fish'
-const HELP_NO_FISH = 'Available commands: help, hide console, add fish'
 const NO_FISH = 'There are no fish to remove'
 
 const mapStateToProps = (state) => {
-  return Object.assign({}, state.console, { existingFish: state.fishtank.fish.length > 0 })
+  return Object.assign({}, state.console, {
+    existingFish: state.fishtank.fish.length > 0,
+    playing: state.animation.playing
+  })
+  // return Object.assign({}, state.console, { existingFish: state.fishtank.fish.length > 0 })
 }
 
 // framework would do this by default - but this is more explicit
@@ -40,7 +49,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 }
 
 const parseCommand = (command, dispatch, props) => {
-  dispatch(displayToConsole(CURSOR + command))
+  dispatch(displayToConsole(get('CONSOLE_CURSOR') + command))
   const elements = command.trim().split(DELIMITER)
   switch (elements.length) {
     case 1:
@@ -58,6 +67,10 @@ const parseVerbOnlyCommand = (verb, props) => {
   switch (verb) {
     case VERBS.HELP:
       return displayToConsole(buildHelpString(props))
+    case VERBS.PLAY:
+      return playAnimation()
+    case VERBS.PAUSE:
+      return pauseAnimation()
     default:
       return error()
   }
@@ -75,11 +88,23 @@ const parseVerbNounCommand = (verb, noun, props) => {
 }
 
 const error = () => {
-  return displayToConsole(INVALID_COMMAND)
+  return displayToConsole(get('CONSOLE_INVALID_COMMAND'))
 }
 
 const buildHelpString = (props) => {
-  return props.existingFish ? HELP : HELP_NO_FISH
+  const commands = []
+  commands.push(VERBS.HELP)
+  commands.push(VERBS.HIDE + DELIMITER + NOUNS.CONSOLE)
+  commands.push(VERBS.ADD + DELIMITER + NOUNS.FISH)
+  if (props.existingFish) {
+    commands.push(VERBS.REMOVE + DELIMITER + NOUNS.FISH)
+    if (props.playing) {
+      commands.push(VERBS.PAUSE)
+    } else {
+      commands.push(VERBS.PLAY)
+    }
+  }
+  return get('CONSOLE_HELP_INTRO') + commands.join(get('CONSOLE_HELP_DELIMITER'))
 }
 
 const parseConsoleCommand = (verb) => {
@@ -101,9 +126,3 @@ const parseFishCommand = (verb, props) => {
       return error()
   }
 }
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  mergeProps
-)(View)

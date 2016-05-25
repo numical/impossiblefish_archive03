@@ -11,5 +11,7 @@ export default {
   HIDE_CONSOLE: {menu: 'Hide Console'},
   CONSOLE_INTRODUCTION: ['***Fishtank Console***', "type 'help' for available commands"],
   CONSOLE_CURSOR: ':',
-  CONSOLE_INVALID_COMMAND: 'Invalid command, type "help"'
+  CONSOLE_INVALID_COMMAND: 'Invalid command, type "help"',
+  CONSOLE_HELP_INTRO: 'Available commands: ',
+  CONSOLE_HELP_DELIMITER: ', '
 }
