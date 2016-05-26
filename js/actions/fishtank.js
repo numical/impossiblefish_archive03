@@ -25,14 +25,23 @@ export const RESIZE_TANK = 'RESIZE_TANK'
 export const resizeTank = (width, height) => {
   // an async dispatch as this is called within shouldComponentUpdate() of FishtankView
   return (dispatch, getState) => {
-    // cause fish to recalculate their tween-based movement
     deanimateFish(getState().fishtank)
     dispatch({type: RESIZE_TANK, width: width, height: height})
   }
 }
 
 export const INFINITE_TANK = 'INFINITE_TANK'
-export const infiniteTank = () => ({type: INFINITE_TANK})
+export const infiniteTank = () => {
+  return (dispatch, getState) => {
+    deanimateFish(getState().fishtank)
+    dispatch({type: INFINITE_TANK})
+  }
+}
 
 export const FINITE_TANK = 'FINITE_TANK'
-export const finiteTank = () => ({type: FINITE_TANK})
+export const finiteTank = () => {
+  return (dispatch, getState) => {
+    deanimateFish(getState().fishtank)
+    dispatch({type: FINITE_TANK})
+  }
+}
