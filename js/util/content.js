@@ -1,24 +1,28 @@
 'use strict'
 
-const LANGUAGES = [
-  {
-    key: 'en',
-    icon: require('./../../i18n/en/flag.png'),
-    content: require('./../../i18n/en/content.js').default
-  },
-  {
-    key: 'de',
-    icon: require('./../../i18n/de/flag.png'),
-    content: require('./../../i18n/de/content.js').default
+class Language {
+  constructor (locale) {
+    this.locale = locale
+    this.flag = require('./../../i18n/' + locale + '/flag.png')
+    this.content = require('./../../i18n/' + locale + '/content.js').default
   }
-]
+}
 
-let language = LANGUAGES[0]
+const LANGUAGES = {
+  en: new Language('en'),
+  de: new Language('de')
+}
 
-export function languages () { return LANGUAGES }
+let currentLanguage = LANGUAGES.en
+
+export function languages () { return Object.values(LANGUAGES) }
+
+export function changeLanguage (locale) {
+  currentLanguage = LANGUAGES[locale]
+}
 
 export function get (key, subkey) {
-  let value = language.content[key]
+  let value = currentLanguage.content[key]
   if (!value) return `Missing content for key '${key}'`
   if (subkey) {
     value = value[subkey]
@@ -28,7 +32,7 @@ export function get (key, subkey) {
 }
 
 export function has (key, subkey) {
-  let value = language.content[key]
+  let value = currentLanguage.content[key]
   if (!value) return false
   if (subkey) {
     value = value[subkey]

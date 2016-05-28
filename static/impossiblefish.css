@@ -148,3 +148,11 @@ canvas {
   border:none;
   outline:none;
 }
+
+.flags {
+  float: left;
+  margin-left: 10px;
+}
+.flag {
+  padding-right: 2px
+}
