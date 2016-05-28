@@ -2,4 +2,3 @@
 * switch to woff format for font, not woof2 (incompatible with Microsoft and Apple browswers)
 * switch to webpack 2 once out of beta
 * switchable graphics between Konva and SVG?
-* use https://github.com/tweenjs/tween.js for fish movement

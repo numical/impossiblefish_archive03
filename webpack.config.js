@@ -21,6 +21,12 @@ module.exports = {
       { test: /\.css$/,
         loader: StyleExtHtmlWebpackPlugin.inline('postcss-loader')
       },
+      { test: /\.png$/,
+        loader: 'url-loader',
+        query: {
+          mimetype: 'image/png'
+        }
+      },
       { test: /\.js$/,
         loader: 'babel-loader',
         query: {

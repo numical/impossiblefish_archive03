@@ -1,8 +1,12 @@
 import React from 'react'
-import { get } from '../util/content.js'
+import { get, languages } from '../util/content.js'
 
+const renderIcon = (language) => {
+  return <img key={language.key} src={language.icon} className='languageIcon'></img>
+}
 export default () => (
   <header>
-    {get('HEADER')}
+  {languages().map(renderIcon)}
+  {get('HEADER')}
   </header>
 )
