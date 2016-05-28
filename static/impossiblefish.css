@@ -151,8 +151,16 @@ canvas {
 
 .flags {
   float: left;
-  margin-left: 10px;
+  margin-left: 50px;
 }
+
 .flag {
-  padding-right: 2px
+  margin: 3px
+}
+
+.flag:hover {
+  border-style: solid;
+  border-width: 3px;
+  margin: 0px;
+  border-color: rgb(249,205,37);
 }
