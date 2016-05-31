@@ -1,6 +1,5 @@
 export default {
   HEADER: 'unmoglich fisch',
-  COPYRIGHT: 'Copyright &copy; 2016, Incremental Ltd.',
   PLAY_ANIMATION: {menu: 'Abspielen', console: 'Animation playing'},
   PAUSE_ANIMATION: {menu: 'Pause', console: 'Animation paused'},
   ADD_FISH: {menu: 'Ergenzen Fisch', console: 'Fish added'},

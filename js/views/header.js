@@ -1,7 +1,7 @@
 import React from 'react'
 import { get, languages } from '../util/content.js'
 
-const HeaderView = React.createClass({
+export default React.createClass({
 
   render () {
     return (
@@ -25,5 +25,3 @@ const HeaderView = React.createClass({
     </img>
   }
 })
-
-export default HeaderView

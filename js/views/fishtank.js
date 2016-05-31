@@ -2,7 +2,7 @@ import React from 'react'
 import { findDOMNode } from 'react-dom'
 import { Stage, Layer } from 'react-konva'
 import { getCSSBoxInfo, getFirstChildWithTag } from '../util/DOMHacks.js'
-import Fish from './fish.js'
+import Fish from '../components/fish.js'
 
 const FISHTANK = 'fishtank'
 const CANVAS_CONTAINER = 'canvas'
@@ -62,7 +62,7 @@ export default React.createClass({
           height={this.props.height}
           width={this.props.width}>
           <Layer>
-            {this.props.fish.map((fish) => <Fish model={fish}/>)}
+            {this.props.fish.map((fish) => <Fish key={fish.id} model={fish}/>)}
           </Layer>
         </Stage>
       </div>)

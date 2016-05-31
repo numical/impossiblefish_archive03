@@ -3,7 +3,7 @@ import { get } from '../util/content.js'
 
 const CURSOR = get('CONSOLE_CURSOR')
 
-const ConsoleView = React.createClass({
+export default React.createClass({
   render () {
     if (!this.props.visible) return null
     return (
@@ -59,5 +59,3 @@ const ConsoleView = React.createClass({
   }
 
 })
-
-export default ConsoleView

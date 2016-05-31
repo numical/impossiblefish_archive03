@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MenuView = React.createClass({
+export default React.createClass({
   render () {
     return (
       <div id='menu-container'>
@@ -21,5 +21,3 @@ const MenuView = React.createClass({
     }
   }
 })
-
-export default MenuView
