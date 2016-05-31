@@ -1,8 +1,8 @@
 import React from 'react'
 import { findDOMNode } from 'react-dom'
-import { Stage, Layer, Shape } from 'react-konva'
+import { Stage, Layer } from 'react-konva'
 import { getCSSBoxInfo, getFirstChildWithTag } from '../util/DOMHacks.js'
-import { drawFish } from '../fish/appearance.js'
+import Fish from './fish.js'
 
 const FISHTANK = 'fishtank'
 const CANVAS_CONTAINER = 'canvas'
@@ -11,7 +11,7 @@ const CANVAS_CONTAINER_CLASS = 'tankBorder'
 const CANVAS_TAG = 'CANVAS'
 const RESIZE_EVENTS = ['resize', 'orientationchange']
 
-const FishtankView = React.createClass({
+export default React.createClass({
 
   componentDidMount () {
     const canvasContainer = findDOMNode(this.refs[CANVAS_CONTAINER])
@@ -62,23 +62,9 @@ const FishtankView = React.createClass({
           height={this.props.height}
           width={this.props.width}>
           <Layer>
-            {this.props.fish.map(renderFish)}
+            {this.props.fish.map((fish) => <Fish model={fish}/>)}
           </Layer>
         </Stage>
       </div>)
   }
 })
-
-const renderFish = (fish) => {
-  return (
-    <Shape
-      key={fish.id}
-      x={fish.x}
-      y={fish.y}
-      rotation={fish.rotation}
-      sceneFunc={drawFish.bind(null, fish)}
-    />
-  )
-}
-
-export default FishtankView
