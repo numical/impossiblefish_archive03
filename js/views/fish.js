@@ -28,6 +28,12 @@ const STYLES = {
     ctx.moveTo(3 * units, 0)
     ctx.lineTo(4 * units, 0)
     ctx.stroke()
+  },
+  RECTANGLE: (units, ctx) => {
+    ctx.fillStyle = 'yellow'
+    ctx.beginPath()
+    ctx.rect(-5 * units, -3 * units, 10 * units, 6 * units)
+    ctx.fill()
   }
 }
 
@@ -53,8 +59,15 @@ export default React.createClass({
         y={y}
         rotation={rotation}
         sceneFunc={STYLES.SOLID.bind(null, FEM)}
+        hitFunc={this.hitFn.bind(null, FEM)}
         onClick={this.props.click}
       />
     )
+  },
+
+  hitFn (units, ctx) {
+    ctx.beginPath()
+    ctx.rect(-5 * units, -3 * units, 10 * units, 6 * units)
+    ctx.fill()
   }
 })
