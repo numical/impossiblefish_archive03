@@ -1,3 +1,4 @@
+* deploy scripts + tidy up npm commands
 * stop using string refs in react and instead callback functions - see https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute
 * switch to woff format for font, not woof2 (incompatible with Microsoft and Apple browswers)
 * switch to webpack 2 once out of beta
