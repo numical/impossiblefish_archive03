@@ -20,3 +20,7 @@ export function randomFractionOf (intValue, minFraction) {
 export function randomBoolean () {
   return random() < 0.5
 }
+
+export function randomFrom (array) {
+  return array[randomInt(0, array.length - 1)]
+}

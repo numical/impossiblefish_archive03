@@ -2,6 +2,7 @@
 
 import Counter from '../util/counter.js'
 import { randomInt } from '../util/random.js'
+import { randomMeme } from '../util/memes.js'
 import TWEEN from 'tween.js'
 
 const FISH_SCALE = 1
@@ -107,7 +108,8 @@ export function newFish (fishtank) {
     x: randomInt(fishtank.size.width),
     y: randomInt(fishtank.size.height),
     rotation: 0,
-    FEM: FEM
+    FEM: FEM,
+    meme: randomMeme()
   }
 }
 
