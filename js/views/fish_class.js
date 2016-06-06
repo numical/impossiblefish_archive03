@@ -39,7 +39,11 @@ const STYLES = {
 }
 
 export default React.createClass({
-/*
+
+  componentWillMount () {
+    this.sceneFn = STYLES.SOLID.bind(this, this.props.model.FEM)
+  },
+
   componentDidMount () {
     const units = this.props.model.FEM
     this.refs.shape.cache({
@@ -50,33 +54,18 @@ export default React.createClass({
       drawBorder: false
     })
   },
-*/
+
   render () {
-    const { x, y, rotation, FEM } = this.props.model
+    const { x, y, rotation } = this.props.model
     return (
       <Shape
         ref='shape'
         x={x}
         y={y}
         rotation={rotation}
-        sceneFunc={this.sceneFn.bind(this, FEM)}
+        sceneFunc={this.sceneFn}
         onClick={this.props.click}
       />
     )
-  },
-  sceneFn (units, ctx) {
-    ctx.fillStyle = 'yellow'
-    ctx.beginPath()
-    ctx.moveTo(5 * units, 0)
-    ctx.quadraticCurveTo(units, -4 * units, -5 * units, 2 * units)
-    ctx.lineTo(-5 * units, -2 * units)
-    ctx.quadraticCurveTo(units, 4 * units, 5 * units, 0)
-    ctx.fill()
-    ctx.moveTo(3 * units, 0)
-    ctx.lineTo(4 * units, 0)
-    ctx.strokeStyle = 'white'
-    ctx.lineWidth = 2
-    ctx.stroke()
-    ctx.fillStrokeShape(this.refs.shape)
   }
 })
