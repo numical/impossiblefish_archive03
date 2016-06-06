@@ -7,7 +7,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    click: () => console.log('fish clicked')
+    click: (konvaEvent) => {
+      konvaEvent.evt.preventDefault() // stopPropagation()
+      console.log('fish clicked ')
+    }
   }
 }
 

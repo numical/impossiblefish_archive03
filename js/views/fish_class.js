@@ -16,7 +16,6 @@ const STYLES = {
     ctx.strokeStyle = 'white'
     ctx.lineWidth = 2
     ctx.stroke()
-    ctx.fillStrokeShape(this.refs.shape)
   },
   OUTLINE: (units, ctx) => {
     ctx.lineWidth = 2
@@ -38,12 +37,8 @@ const STYLES = {
   }
 }
 
-export default React.createClass({
-
-  componentWillMount () {
-    this.sceneFn = STYLES.SOLID.bind(this, this.props.model.FEM)
-  },
-
+const Fish = React.createClass({
+/*
   componentDidMount () {
     const units = this.props.model.FEM
     this.refs.shape.cache({
@@ -55,6 +50,10 @@ export default React.createClass({
     })
   },
 
+  componentWillMount () {
+    this.sceneFn = this.sceneFn.bind(this)
+  },
+*/
   render () {
     const { x, y, rotation } = this.props.model
     return (
@@ -67,5 +66,11 @@ export default React.createClass({
         onClick={this.props.click}
       />
     )
+  },
+  sceneFn (ctx) {
+    STYLES.SOLID(this.props.model.FEM, ctx)
+    ctx.fillStrokeShape(this.refs.shape)
   }
 })
+
+export default Fish
