@@ -1,5 +1,4 @@
-import { playAnimation, pauseAnimation } from './animation.js'
-import { deanimateFish } from '../fish/behaviour.js'
+import { playAnimation, pauseAnimation, resetAnimation } from './animation.js'
 
 export const ADD_FISH = 'ADD_FISH'
 export const addFish = () => {
@@ -24,24 +23,24 @@ export const removeFish = () => {
 export const RESIZE_TANK = 'RESIZE_TANK'
 export const resizeTank = (width, height) => {
   // an async dispatch as this is called within shouldComponentUpdate() of FishtankView
-  return (dispatch, getState) => {
-    deanimateFish(getState().fishtank)
+  return (dispatch) => {
+    dispatch(resetAnimation())
     dispatch({type: RESIZE_TANK, width: width, height: height})
   }
 }
 
 export const INFINITE_TANK = 'INFINITE_TANK'
 export const infiniteTank = () => {
-  return (dispatch, getState) => {
-    deanimateFish(getState().fishtank)
+  return (dispatch) => {
+    dispatch(resetAnimation())
     dispatch({type: INFINITE_TANK})
   }
 }
 
 export const FINITE_TANK = 'FINITE_TANK'
 export const finiteTank = () => {
-  return (dispatch, getState) => {
-    deanimateFish(getState().fishtank)
+  return (dispatch) => {
+    dispatch(resetAnimation())
     dispatch({type: FINITE_TANK})
   }
 }

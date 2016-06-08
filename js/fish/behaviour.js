@@ -113,7 +113,13 @@ export function newFish (fishtank) {
   }
 }
 
-export function animateFish (fishtank) {
+export function incrementFishPosition (fish, fishtank) {
+  if (!fish.tweenPos) return fish
+  const mode = fishtank.infinite ? INFINITE_MODE : FINITE_MODE
+  return mode.incrementFishPosition(fish, fishtank)
+}
+
+export function updateFishTweens (fishtank) {
   fishtank.fish.forEach((fish) => {
     if (!fish.tweenPos) {
       fish.tweenPos = {x: fish.x, y: fish.y, rotation: fish.rotation}
@@ -124,15 +130,10 @@ export function animateFish (fishtank) {
   TWEEN.update()
 }
 
-export function deanimateFish (fishtank) {
+export function removeFishTweens (fishtank) {
   TWEEN.removeAll()
   fishtank.fish.forEach((fish) => {
     delete fish.tweenPos
   })
 }
 
-export function incrementFishPosition (fish, fishtank) {
-  if (!fish.tweenPos) return fish
-  const mode = fishtank.infinite ? INFINITE_MODE : FINITE_MODE
-  return mode.incrementFishPosition(fish, fishtank)
-}

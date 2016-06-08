@@ -1,4 +1,4 @@
-import { animateFish } from '../fish/behaviour.js'
+import { updateFishTweens, removeFishTweens } from '../fish/behaviour.js'
 
 export const ANIMATE = 'ANIMATE'
 export const animate = (requestId) => ({type: ANIMATE, requestId: requestId})
@@ -9,7 +9,7 @@ export const playAnimation = () => {
     if (getState().animation.playing) return
     const animation = () => {
       const requestId = window.requestAnimationFrame(animation)
-      animateFish(getState().fishtank)
+      updateFishTweens(getState().fishtank)
       dispatch(animate(requestId))
     }
     dispatch({type: PLAY_ANIMATION})
@@ -24,5 +24,12 @@ export const pauseAnimation = () => {
     if (!playing) return
     window.cancelAnimationFrame(requestId)
     dispatch({type: PAUSE_ANIMATION})
+  }
+}
+
+export const RESET_ANIMATION = 'RESET_ANIMATION'
+export const resetAnimation = () => {
+  return (dispatch, getState) => {
+    removeFishTweens(getState().fishtank)
   }
 }
