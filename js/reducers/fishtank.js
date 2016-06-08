@@ -1,6 +1,14 @@
 import { ADD_FISH, REMOVE_FISH, RESIZE_TANK, INFINITE_TANK, FINITE_TANK } from '../actions/fishtank.js'
 import { ANIMATE } from '../actions/animation.js'
-import { newFish, incrementFishPosition } from '../fish/behaviour.js'
+import { randomInt } from '../util/random.js'
+import { randomMeme } from '../util/memes.js'
+import Counter from '../util/counter.js'
+import FishTankModes from '../util/fishtankmode.js'
+
+const FISH_SCALE = 1
+const FISH_UNIT = 6
+const FEM = FISH_UNIT * FISH_SCALE
+const FISH_ID = new Counter()
 
 const initialState = {
   fish: [],
@@ -8,23 +16,23 @@ const initialState = {
     width: 0,
     height: 0
   },
-  infinite: false
+  mode: FishTankModes.FINITE_TANK
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_FISH:
-      return updateFishState(state, addFish)
+      return updateFishState(state, addNewFish)
     case REMOVE_FISH:
-      return updateFishState(state, removeFish)
+      return updateFishState(state, removeFirstFish)
     case RESIZE_TANK:
       return updateTankState(state, {size: {width: action.width, height: action.height}})
     case ANIMATE:
-      return updateFishState(state, animateFish)
+      return updateFishState(state, moveAllFish)
     case INFINITE_TANK:
-      return updateTankState(state, {infinite: true})
+      return updateTankState(state, {mode: FishTankModes.INFINITE_TANK})
     case FINITE_TANK:
-      return updateTankState(state, {infinite: false})
+      return updateTankState(state, {mode: FishTankModes.FINITE_TANK})
     default:
       return state
   }
@@ -38,16 +46,25 @@ const updateFishState = (state, updateFn) => {
   return Object.assign({}, state, {fish: updateFn(state)})
 }
 
-const addFish = (fishtank) => {
-  return [ ...fishtank.fish, newFish(fishtank) ]
+const addNewFish = (fishtank) => {
+  const newFish = {
+    id: FISH_ID.next(),
+    x: randomInt(fishtank.size.width),
+    y: randomInt(fishtank.size.height),
+    rotation: 0,
+    FEM: FEM,
+    meme: randomMeme()
+  }
+  return [...fishtank.fish, newFish]
 }
 
-const removeFish = (fishtank) => {
+const removeFirstFish = (fishtank) => {
   return fishtank.fish.slice(0, -1)
 }
 
-const animateFish = (fishtank) => {
+const moveAllFish = (fishtank) => {
   return fishtank.fish.map((fish) => {
-    return incrementFishPosition(fish, fishtank)
+    if (!fish.tweenPos) return fish
+    return fishtank.mode.incrementFishPosition(fish, fishtank)
   })
 }

@@ -6,8 +6,8 @@ var autoprefixer = require('autoprefixer')
 
 module.exports = {
   entry: {
-    impossiblefish: './js/start_react.js',
-    inline: './js/inline.js'
+    impossiblefish: './js/startup/start_react.js',
+    inline: './js/startup/inline.js'
   },
   output: {
     path: './build',

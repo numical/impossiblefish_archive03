@@ -1,14 +1,10 @@
 'use strict'
-
-import Counter from '../util/counter.js'
-import { randomInt } from '../util/random.js'
-import { randomMeme } from '../util/memes.js'
+import { randomInt } from './random.js'
 import TWEEN from 'tween.js'
 
 const FISH_SCALE = 1
 const FISH_UNIT = 6
 const FEM = FISH_UNIT * FISH_SCALE
-const FISH_ID = new Counter()
 const ORIGIN = {x: 0, y: 0}
 
 const FINITE_MODE = {
@@ -102,38 +98,7 @@ const calculateAngle = (fromPos, toPos) => {
   return Math.floor((Math.atan2(y, x) / Math.PI) * 180)
 }
 
-export function newFish (fishtank) {
-  return {
-    id: FISH_ID.next(),
-    x: randomInt(fishtank.size.width),
-    y: randomInt(fishtank.size.height),
-    rotation: 0,
-    FEM: FEM,
-    meme: randomMeme()
-  }
+export default {
+  FINITE_TANK: FINITE_MODE,
+  INFINITE_TANK: INFINITE_MODE
 }
-
-export function incrementFishPosition (fish, fishtank) {
-  if (!fish.tweenPos) return fish
-  const mode = fishtank.infinite ? INFINITE_MODE : FINITE_MODE
-  return mode.incrementFishPosition(fish, fishtank)
-}
-
-export function updateFishTweens (fishtank) {
-  fishtank.fish.forEach((fish) => {
-    if (!fish.tweenPos) {
-      fish.tweenPos = {x: fish.x, y: fish.y, rotation: fish.rotation}
-      const mode = fishtank.infinite ? INFINITE_MODE : FINITE_MODE
-      mode.createFishTween(fish.tweenPos, fishtank)
-    }
-  })
-  TWEEN.update()
-}
-
-export function removeFishTweens (fishtank) {
-  TWEEN.removeAll()
-  fishtank.fish.forEach((fish) => {
-    delete fish.tweenPos
-  })
-}
-

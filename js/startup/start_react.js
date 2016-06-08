@@ -1,6 +1,6 @@
 'use strict'
 
-require('../static/impossiblefish.css')
+require('../../static/impossiblefish.css')
 
 // polyfills & other language extensions
 import 'babel-polyfill'
@@ -8,7 +8,7 @@ import 'babel-polyfill'
 // static javascript assets using es6 modules (transpiled by babel for webpack)
 import 'react'
 import { render } from 'react-dom'
-import app from './components/app.js'
+import app from '../components/app.js'
 import { STARTUP_TIME, STARTUP_ANIMATION_DURATION } from './constants.js'
 
 function startReact () {

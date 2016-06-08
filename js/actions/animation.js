@@ -1,4 +1,4 @@
-import { updateFishTweens, removeFishTweens } from '../fish/behaviour.js'
+import TWEEN from 'tween.js'
 
 export const ANIMATE = 'ANIMATE'
 export const animate = (requestId) => ({type: ANIMATE, requestId: requestId})
@@ -33,3 +33,21 @@ export const resetAnimation = () => {
     removeFishTweens(getState().fishtank)
   }
 }
+
+function updateFishTweens (fishtank) {
+  fishtank.fish.forEach((fish) => {
+    if (!fish.tweenPos) {
+      fish.tweenPos = {x: fish.x, y: fish.y, rotation: fish.rotation}
+      fishtank.mode.createFishTween(fish.tweenPos, fishtank)
+    }
+  })
+  TWEEN.update()
+}
+
+function removeFishTweens (fishtank) {
+  TWEEN.removeAll()
+  fishtank.fish.forEach((fish) => {
+    delete fish.tweenPos
+  })
+}
+
