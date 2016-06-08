@@ -14,6 +14,17 @@ const RESIZE_EVENTS = ['resize', 'orientationchange']
 export default React.createClass({
 
   componentDidMount () {
+    // click listener
+    // 2 Konva issues here
+    // - cannot add content events in <Stage />
+    // - have to manually check for bubble cancel
+    this.refs[CANVAS_CONTAINER].node.on('contentClick', (konvaEvent) => {
+      if (!konvaEvent.evt.cancelBubble) {
+        this.props.click()
+      }
+    })
+
+    // resize canvas to size of screen
     const canvasContainer = findDOMNode(this.refs[CANVAS_CONTAINER])
     const state = {
       box: getCSSBoxInfo(canvasContainer),
@@ -54,7 +65,7 @@ export default React.createClass({
 
   render () {
     return (
-      <div id={FISHTANK} ref={FISHTANK} onClick={this.props.click}>
+      <div id={FISHTANK} ref={FISHTANK}>
         <Stage
           ref={CANVAS_CONTAINER}
           className={CANVAS_CONTAINER_CLASS}

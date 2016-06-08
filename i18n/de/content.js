@@ -12,5 +12,6 @@ export default {
   CONSOLE_CURSOR: ':',
   CONSOLE_INVALID_COMMAND: 'Invalid command, type "help"',
   CONSOLE_HELP_INTRO: 'Available commands: ',
-  CONSOLE_HELP_DELIMITER: ', '
+  CONSOLE_HELP_DELIMITER: ', ',
+  FISH_MESSAGE: 'Fish {id} says \'{meme}\''
 }

@@ -14,7 +14,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    click: () => dispatch(toggleMenu()),
+    click: (event) => {
+      dispatch(toggleMenu())
+    },
     resize: (width, height) => dispatch(resizeTank(width, height))
   }
 }

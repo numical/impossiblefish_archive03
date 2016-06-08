@@ -21,12 +21,19 @@ export function changeLanguage (locale) {
   currentLanguage = LANGUAGES[locale]
 }
 
-export function get (key, subkey) {
+export function get (key, subkey, tokens) {
+  if (!tokens && typeof subkey === 'object') {
+    tokens = subkey
+    subkey = null
+  }
   let value = currentLanguage.content[key]
   if (!value) return `Missing content for key '${key}'`
   if (subkey) {
     value = value[subkey]
     if (!value) return `Missing content for key '${key}' and subkey '${subkey}'`
+  }
+  if (tokens) {
+    value = parse(value, tokens)
   }
   return value
 }
@@ -39,4 +46,11 @@ export function has (key, subkey) {
     if (!value) false
   }
   return true
+}
+
+function parse (templateExpression, tokens) {
+  for (var token in tokens) {
+    templateExpression = templateExpression.replace('{' + token + '}', tokens[token])
+  }
+  return templateExpression
 }

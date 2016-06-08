@@ -57,7 +57,7 @@ export default React.createClass({
         y={y}
         rotation={rotation}
         sceneFunc={this.sceneFn}
-        onClick={this.props.click}
+        onClick={this.clickFn}
       />
     )
   },
@@ -66,5 +66,11 @@ export default React.createClass({
     if (this.refs.shape) {
       ctx.fillStrokeShape(this.refs.shape)
     }
+  },
+  clickFn (konvaEvent) {
+    konvaEvent.cancelBubble = true
+    // Konva issue - only way to alert content event listener to ignore this
+    konvaEvent.evt.cancelBubble = true
+    this.props.click(this.props.model)
   }
 })

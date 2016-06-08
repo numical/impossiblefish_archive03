@@ -1,4 +1,6 @@
 import { connect } from 'react-redux'
+import { displayToConsole } from '../actions/console.js'
+import { get } from '../util/content.js'
 import View from '../views/fish.js'
 
 const mapStateToProps = (state) => {
@@ -7,9 +9,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    click: (konvaEvent) => {
-      konvaEvent.evt.preventDefault() // stopPropagation()
-      console.log('fish clicked ')
+    click: (fish) => {
+      dispatch(displayToConsole(get('FISH_MESSAGE', fish)))
     }
   }
 }
