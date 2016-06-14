@@ -1,4 +1,5 @@
 import TWEEN from 'tween.js'
+import { updateFish } from './fishtank.js'
 
 export const ANIMATE = 'ANIMATE'
 export const animate = (requestId) => ({type: ANIMATE, requestId: requestId})
@@ -9,12 +10,28 @@ export const playAnimation = () => {
     if (getState().animation.playing) return
     const animation = () => {
       const requestId = window.requestAnimationFrame(animation)
-      updateFishTweens(getState().fishtank)
+      updateFishTweens(dispatch, getState().fishtank)
       dispatch(animate(requestId))
     }
     dispatch({type: PLAY_ANIMATION})
     animation()
   }
+}
+
+function updateFishTweens (dispatch, fishtank) {
+  fishtank.fish.forEach((fish) => {
+    if (fish.animation.active) {
+      if (!fish.animation.tween) {
+        const pos = Object.assign({}, fish.pos)
+        const animation = Object.assign({}, fish.animation, {
+          tween: fishtank.mode.createFishTween(pos, fishtank),
+          pos: pos
+        })
+        dispatch(updateFish(fish.id, {animation: animation}))
+      }
+    }
+  })
+  TWEEN.update()
 }
 
 export const PAUSE_ANIMATION = 'PAUSE_ANIMATION'
@@ -30,24 +47,32 @@ export const pauseAnimation = () => {
 export const RESET_ANIMATION = 'RESET_ANIMATION'
 export const resetAnimation = () => {
   return (dispatch, getState) => {
-    removeFishTweens(getState().fishtank)
+    TWEEN.removeAll()
+    getState().fishtank.fish.forEach((fish) => {
+      const animation = Object.assign({}, fish.animation, {tween: null, pos: null})
+      dispatch(updateFish(fish.id, {animation: animation}))
+    })
   }
 }
 
-function updateFishTweens (fishtank) {
-  fishtank.fish.forEach((fish) => {
-    if (!fish.tweenPos) {
-      fish.tweenPos = {x: fish.x, y: fish.y, rotation: fish.rotation}
-      fishtank.mode.createFishTween(fish.tweenPos, fishtank)
+export const PLAY_FISH = 'PLAY_FISH'
+export const playFish = (id) => {
+  return (dispatch, getState) => {
+    const fish = getState().fishtank.fish.filter((fish) => fish.id === id)
+    if (fish && !fish.animation.active) {
+      TWEEN.add(fish.animation.tween)
+      dispatch({type: PLAY_FISH})
     }
-  })
-  TWEEN.update()
+  }
 }
 
-function removeFishTweens (fishtank) {
-  TWEEN.removeAll()
-  fishtank.fish.forEach((fish) => {
-    delete fish.tweenPos
-  })
+export const PAUSE_FISH = 'PAUSE_FISH'
+export const pauseFish = (id) => {
+  return (dispatch, getState) => {
+    const fish = getState().fishtank.fish.filter((fish) => fish.id === id)
+    if (fish && fish.animation.active) {
+      TWEEN.remove(fish.animation.tween)
+      dispatch({type: PAUSE_FISH})
+    }
+  }
 }
-

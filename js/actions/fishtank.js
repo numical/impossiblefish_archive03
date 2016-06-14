@@ -44,3 +44,14 @@ export const finiteTank = () => {
     dispatch({type: FINITE_TANK})
   }
 }
+
+export const UPDATE_FISH = 'UPDATE_FISH'
+export const updateFish = (id, state) => {
+  /*
+  return (dispatch) => {
+    dispatch({type: UPDATE_FISH, id: id, changedState: state})
+  }
+  */
+  return {type: UPDATE_FISH, id: id, changedState: state}
+}
+

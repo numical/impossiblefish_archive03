@@ -1,4 +1,4 @@
-import { ADD_FISH, REMOVE_FISH, RESIZE_TANK, INFINITE_TANK, FINITE_TANK } from '../actions/fishtank.js'
+import { ADD_FISH, REMOVE_FISH, UPDATE_FISH, RESIZE_TANK, INFINITE_TANK, FINITE_TANK } from '../actions/fishtank.js'
 import { ANIMATE } from '../actions/animation.js'
 import { randomInt } from '../util/random.js'
 import { randomMeme } from '../util/memes.js'
@@ -25,6 +25,8 @@ export default (state = initialState, action) => {
       return updateFishState(state, addNewFish)
     case REMOVE_FISH:
       return updateFishState(state, removeFirstFish)
+    case UPDATE_FISH:
+      return updateFishState(state, updateSingleFish.bind(null, action.id, action.changedState))
     case RESIZE_TANK:
       return updateTankState(state, {size: {width: action.width, height: action.height}})
     case ANIMATE:
@@ -49,11 +51,18 @@ const updateFishState = (state, updateFn) => {
 const addNewFish = (fishtank) => {
   const newFish = {
     id: FISH_ID.next(),
-    x: randomInt(fishtank.size.width),
-    y: randomInt(fishtank.size.height),
-    rotation: 0,
     FEM: FEM,
-    meme: randomMeme()
+    pos: {
+      x: randomInt(fishtank.size.width),
+      y: randomInt(fishtank.size.height),
+      rotation: 0
+    },
+    meme: randomMeme(),
+    animation: {
+      pos: null,
+      tween: null,
+      active: true
+    }
   }
   return [...fishtank.fish, newFish]
 }
@@ -64,7 +73,13 @@ const removeFirstFish = (fishtank) => {
 
 const moveAllFish = (fishtank) => {
   return fishtank.fish.map((fish) => {
-    if (!fish.tweenPos) return fish
+    if (!fish.animation.active) return fish
     return fishtank.mode.incrementFishPosition(fish, fishtank)
+  })
+}
+
+const updateSingleFish = (id, changedState, fishtank) => {
+  return fishtank.fish.map((fish) => {
+    return (fish.id === id) ? Object.assign({}, fish, changedState) : fish
   })
 }

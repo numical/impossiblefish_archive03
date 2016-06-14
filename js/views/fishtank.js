@@ -73,7 +73,7 @@ export default React.createClass({
           height={this.props.height}
           width={this.props.width}>
           <Layer>
-            {this.props.fish.map((fish) => <Fish key={fish.id} model={fish}/>)}
+            {this.props.fish.map((fish) => <Fish key={fish.id} fish={fish} />)}
           </Layer>
         </Stage>
       </div>)

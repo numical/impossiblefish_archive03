@@ -10,9 +10,11 @@ const ORIGIN = {x: 0, y: 0}
 const FINITE_MODE = {
   incrementFishPosition: (fish) => {
     return Object.assign({}, fish, {
-      x: fish.tweenPos.x,
-      y: fish.tweenPos.y,
-      rotation: fish.tweenPos.rotation
+      pos: {
+        x: fish.animation.pos.x,
+        y: fish.animation.pos.y,
+        rotation: fish.animation.pos.rotation
+      }
     })
   },
   createFishTween: (position, fishtank) => {
@@ -34,7 +36,7 @@ const FINITE_MODE = {
       .onComplete(() => {
         FINITE_MODE.createFishTween(position, fishtank)
       })
-    rotate.chain(move).start()
+    return rotate.chain(move).start()
   },
   limitMovement: (fromPos, toPos, maxDistance) => {
     const distance = Math.hypot(toPos.y - fromPos.y, toPos.x - fromPos.y)
@@ -48,9 +50,11 @@ const FINITE_MODE = {
 const INFINITE_MODE = {
   incrementFishPosition: (fish, fishtank) => {
     return Object.assign({}, fish, {
-      x: INFINITE_MODE.ensureInBounds(fish.tweenPos.x, fishtank.size.width),
-      y: INFINITE_MODE.ensureInBounds(fish.tweenPos.y, fishtank.size.height),
-      rotation: fish.tweenPos.rotation
+      pos: {
+        x: INFINITE_MODE.ensureInBounds(fish.animation.pos.x, fishtank.size.width),
+        y: INFINITE_MODE.ensureInBounds(fish.animation.pos.y, fishtank.size.height),
+        rotation: fish.animation.pos.rotation
+      }
     })
   },
   ensureInBounds: (n, max) => {
@@ -84,7 +88,7 @@ const INFINITE_MODE = {
       .onComplete(() => {
         INFINITE_MODE.createFishTween(position, fishtank)
       })
-    rotate.chain(move).start()
+    return rotate.chain(move).start()
   }
 }
 

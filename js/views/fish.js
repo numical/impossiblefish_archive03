@@ -39,7 +39,7 @@ const STYLES = {
 
 export default React.createClass({
   componentDidMount () {
-    const units = this.props.model.FEM
+    const units = this.props.fish.FEM
     this.refs.shape.cache({
       x: -5 * units,
       y: -3 * units,
@@ -49,7 +49,7 @@ export default React.createClass({
     })
   },
   render () {
-    const { x, y, rotation } = this.props.model
+    const { x, y, rotation } = this.props.fish.pos
     return (
       <Shape
         ref='shape'
@@ -62,7 +62,7 @@ export default React.createClass({
     )
   },
   sceneFn (ctx) {
-    STYLES.SOLID(this.props.model.FEM, ctx)
+    STYLES.SOLID(this.props.fish.FEM, ctx)
     if (this.refs.shape) {
       ctx.fillStrokeShape(this.refs.shape)
     }
@@ -71,6 +71,6 @@ export default React.createClass({
     konvaEvent.cancelBubble = true
     // Konva issue - only way to alert content event listener to ignore this
     konvaEvent.evt.cancelBubble = true
-    this.props.click(this.props.model)
+    this.props.click(this.props.fish)
   }
 })

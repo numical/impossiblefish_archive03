@@ -43,12 +43,10 @@ module.exports = {
       cache: false
     }),
     new StyleExtHtmlWebpackPlugin({
-      /*
       minify: {
         processImport: false
       }
-      */
-      minify: true
+      // minify: true
     }),
     new ScriptExtHtmlWebpackPlugin({
       inline: ['inline'],
