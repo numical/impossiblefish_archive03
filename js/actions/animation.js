@@ -58,10 +58,10 @@ export const resetAnimation = () => {
 export const PLAY_FISH = 'PLAY_FISH'
 export const playFish = (id) => {
   return (dispatch, getState) => {
-    const fish = getState().fishtank.fish.filter((fish) => fish.id === id)
+    const fish = getState().fishtank.fish.find((fish) => fish.id === id)
     if (fish && !fish.animation.active) {
       TWEEN.add(fish.animation.tween)
-      dispatch({type: PLAY_FISH})
+      dispatch({type: PLAY_FISH, id: fish.id})
     }
   }
 }
@@ -69,10 +69,10 @@ export const playFish = (id) => {
 export const PAUSE_FISH = 'PAUSE_FISH'
 export const pauseFish = (id) => {
   return (dispatch, getState) => {
-    const fish = getState().fishtank.fish.filter((fish) => fish.id === id)
+    const fish = getState().fishtank.fish.find((fish) => fish.id === id)
     if (fish && fish.animation.active) {
       TWEEN.remove(fish.animation.tween)
-      dispatch({type: PAUSE_FISH})
+      dispatch({type: PAUSE_FISH, id: fish.id})
     }
   }
 }

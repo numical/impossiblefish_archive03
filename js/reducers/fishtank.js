@@ -1,5 +1,5 @@
 import { ADD_FISH, REMOVE_FISH, UPDATE_FISH, RESIZE_TANK, INFINITE_TANK, FINITE_TANK } from '../actions/fishtank.js'
-import { ANIMATE } from '../actions/animation.js'
+import { ANIMATE, PLAY_FISH, PAUSE_FISH } from '../actions/animation.js'
 import { randomInt } from '../util/random.js'
 import { randomMeme } from '../util/memes.js'
 import Counter from '../util/counter.js'
@@ -20,32 +20,55 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
+  const updateFn = selectFishUpdateFn(action)
+  if (updateFn) {
+    return Object.assign({}, state, {fish: updateFn(state)})
+  }
+  const changedState = selectChangedState(action)
+  if (changedState) {
+    return Object.assign({}, state, changedState)
+  }
+  return state
+}
+
+const selectFishUpdateFn = (action) => {
   switch (action.type) {
-    case ADD_FISH:
-      return updateFishState(state, addNewFish)
-    case REMOVE_FISH:
-      return updateFishState(state, removeFirstFish)
-    case UPDATE_FISH:
-      return updateFishState(state, updateSingleFish.bind(null, action.id, action.changedState))
-    case RESIZE_TANK:
-      return updateTankState(state, {size: {width: action.width, height: action.height}})
     case ANIMATE:
-      return updateFishState(state, moveAllFish)
-    case INFINITE_TANK:
-      return updateTankState(state, {mode: FishTankModes.INFINITE_TANK})
-    case FINITE_TANK:
-      return updateTankState(state, {mode: FishTankModes.FINITE_TANK})
+      return moveAllFish
+    case ADD_FISH:
+      return addNewFish
+    case REMOVE_FISH:
+      return removeFirstFish
+    case PLAY_FISH:
+      return updateSingleFishAnimation.bind(null, action.id, {active: true})
+    case PAUSE_FISH:
+      return updateSingleFishAnimation.bind(null, action.id, {active: false})
+    case UPDATE_FISH:
+      return updateSingleFish.bind(null, action.id, action.changedState)
     default:
-      return state
+      return
   }
 }
 
-const updateTankState = (state, updatedValues) => {
-  return Object.assign({}, state, updatedValues)
+const selectChangedState = (action) => {
+  switch (action.type) {
+    case RESIZE_TANK:
+      return {size: {width: action.width, height: action.height}}
+    case INFINITE_TANK:
+      return {mode: FishTankModes.INFINITE_TANK}
+    case FINITE_TANK:
+      return {mode: FishTankModes.FINITE_TANK}
+    default:
+      return
+  }
 }
 
-const updateFishState = (state, updateFn) => {
-  return Object.assign({}, state, {fish: updateFn(state)})
+const moveAllFish = (fishtank) => {
+  return fishtank.fish.map((fish) => {
+    return fish.animation.active
+      ? fishtank.mode.incrementFishPosition(fish, fishtank)
+      : fish
+  })
 }
 
 const addNewFish = (fishtank) => {
@@ -71,11 +94,10 @@ const removeFirstFish = (fishtank) => {
   return fishtank.fish.slice(0, -1)
 }
 
-const moveAllFish = (fishtank) => {
-  return fishtank.fish.map((fish) => {
-    if (!fish.animation.active) return fish
-    return fishtank.mode.incrementFishPosition(fish, fishtank)
-  })
+const updateSingleFishAnimation = (id, changedState, fishtank) => {
+  const fish = fishtank.fish.find((fish) => fish.id === id)
+  const animation = Object.assign({}, fish.animation, changedState)
+  return updateSingleFish(id, {animation: animation}, fishtank)
 }
 
 const updateSingleFish = (id, changedState, fishtank) => {
