@@ -14,17 +14,8 @@ npm run dev
 ```
 Then point your browser at `localhost:8080`
 
-## Technologies Investigated
-Primarily javascript, with a dash of CSS3.
-
-See seperate documentation for each of the concerns of this project:
-* [Constraints](./docs/constraints.md)
-* [Client](./docs/client.md)
-* [Server](./docs/server.md)
-* [Build](./docs/build.md)
-* [Testing](./docs/test.md)
-* [Performance](./docs/performance.md)
-* [Language](./docs/language.md)
+## Documentation
+See the [wiki](https://github.com/numical/impossiblefish/wiki)
 
 ## Licence
 
