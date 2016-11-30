@@ -1,8 +1,9 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin')
-var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-var FavIconsWebpackPlugin = require('favicons-webpack-plugin')
-var autoprefixer = require('autoprefixer')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
+var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+var FavIconsWebpackPlugin = require('favicons-webpack-plugin');
+var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: {
@@ -19,7 +20,7 @@ module.exports = {
         loader: 'file-loader'
       },
       { test: /\.css$/,
-        loader: StyleExtHtmlWebpackPlugin.inline('postcss-loader')
+        loader: ExtractTextWebpackPlugin.extract('style-loader', '!css-loader?importLoaders=1!postcss-loader')
       },
       { test: /\.png$/,
         loader: 'url-loader',
@@ -42,14 +43,8 @@ module.exports = {
       template: './static/index.template',
       cache: false
     }),
-    new StyleExtHtmlWebpackPlugin({
-      /*
-      minify: {
-        processImport: false
-      }
-      */
-      minify: true
-    }),
+    new ExtractTextWebpackPlugin('styles.css'),
+    new StyleExtHtmlWebpackPlugin(),
     new ScriptExtHtmlWebpackPlugin({
       inline: ['inline'],
       defaultAttribute: 'async'
@@ -74,4 +69,4 @@ module.exports = {
       }
     })
   ]
-}
+};
